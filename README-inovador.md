@@ -204,27 +204,81 @@ Uma VPS na **Hetzner** por ~R$25/mês entrega:
 
 ## 7. Mercado e Diferenciais
 
-### Concorrentes por segmento
+### O mapa do que existe hoje — e onde cada um para
 
-**Alimentação:**
-- **Anota AI** — bot WhatsApp + cardápio para restaurantes. Foi **adquirida por valor de 8 dígitos em reais**. Dependia de terceiros para tudo.
-- **Cardápio Web** — catálogo digital. Cobra ~R$150/mês. Sem bot, sem fila.
-- **Goomer** — menu digital. Cobra comissão + mensalidade.
-- **iFood** — marketplace. Cobra 12–30% por pedido. Vendedores odeiam a dependência.
+```
+                    CATÁLOGO   FILA     BOT WPP   NOTIF.     QUALQUER
+                    DIGITAL    UNIF.    PRÓPRIO   POSIÇÃO    NICHO
+                       ↓         ↓        ↓          ↓          ↓
+iFood               ✅          ❌       ❌         ❌          ❌
+Cardápio Web        ✅          ❌       ❌         ❌          ❌
+Anota AI            ✅          ✅       ✅         ❌          ❌
+Trinks              ❌          ✅       ❌         ❌       só salões
+iGestor             ❌          ✅       ❌         ❌       só salões
+Goomer              ✅          ❌       ❌         ❌          ❌
+──────────────────────────────────────────────────────────────────────
+NOSSO KIT           ✅          ✅       ✅         ✅          ✅
+```
 
-**Barbearias / Salões:**
-- **Trinks, iGestor, Salonized** — agendamento online. Cobram mensalidade, sem WhatsApp nativo, sem fila em tempo real.
+### O que cada concorrente faz e onde trava
 
-**Oficinas / Assistência técnica:**
-- Mercado sub-atendido. Maioria usa caderno ou WhatsApp manual. Zero concorrência direta com o que estamos construindo.
+**iFood / Marketplaces**
+Resolve catálogo e pagamento, mas o vendedor entra no ecossistema deles. Paga 12–30% por pedido, não tem contato direto com o cliente (o cliente é do iFood, não da loja), e não tem fila de produção — só recebe o pedido por uma impressora. Dependência total.
 
-### Gap que o mercado não preenche
-Nenhum concorrente entrega hoje:
-- Fila unificada (catálogo + WhatsApp direto + manual) numa tela só
-- Notificação automática de posição na fila via WhatsApp do próprio vendedor
-- Infraestrutura própria sem comissão por pedido
-- Kit adaptável para qualquer nicho (não só restaurantes)
-- White-label real (vendedor vê a marca dele)
+**Cardápio Web / Goomer**
+Catálogo bonito, o cliente monta o pedido e... cai no WhatsApp do vendedor como texto. A partir daí o vendedor organiza na cabeça ou no papel. Sem fila, sem notificação, sem bot. O problema de organização continua existindo, só mudou o canal de entrada.
+
+**Anota AI** *(o mais próximo — e foi adquirida por isso)*
+Bot de WhatsApp que entende pedidos + catálogo integrado. O mais avançado que existiu no mercado brasileiro. Mas tinha limitações estruturais:
+- Dependia 100% de infraestrutura de terceiros → custos altos em escala
+- Focada exclusivamente em restaurantes → nicho fechado
+- Sem notificação de posição na fila para o cliente
+- Sem painel com drag-and-drop para o vendedor
+- White-label limitado
+
+**Trinks / iGestor** *(barbearias e salões)*
+Resolvem agendamento e fila para salões, mas:
+- Sem catálogo de produtos
+- WhatsApp só para lembrete de horário, não para fluxo de atendimento completo
+- Fechados no nicho de beleza — não adaptam para outros segmentos
+- Mensalidade cara para o que entregam
+
+**Oficinas / Assistência técnica**
+Mercado completamente sub-atendido. A maioria usa caderno ou WhatsApp manual. Zero concorrência direta. O técnico atualiza o status no painel ("Em reparo", "Pronto") e o bot avisa o cliente automaticamente — sem o técnico parar o que está fazendo para digitar nada.
+
+### O gap real — o que ninguém faz junto
+
+O problema central que nenhum resolve completamente:
+
+> Um vendedor hoje usa 4 ferramentas separadas que não se falam:
+> caderno/papel pra fila → WhatsApp pra atender → catálogo pra mostrar produtos → olho pra saber em qual pedido está.
+
+O nosso kit colapsa tudo num único sistema onde **uma ação alimenta os outros automaticamente:**
+
+```
+Cliente pede pelo catálogo
+        ↓ automático
+Entra na fila do painel
+        ↓ automático
+Bot confirma pro cliente com posição na fila
+        ↓ automático (a cada avanço da fila)
+Cliente recebe atualização sem precisar perguntar
+        ↓ quando vendedor clica "Pronto"
+Bot avisa cliente para buscar / aguardar entrega
+```
+
+O vendedor faz **uma coisa** (atualizar o status no painel) e **três coisas acontecem** (fila atualiza, próximo cliente é avisado, cliente atual é notificado). Isso é o que não existe pronto hoje.
+
+### Por que é difícil de copiar rapidamente
+
+Não é só questão de código — é questão de ter construído a infra própria:
+
+- Quem depende de Z-API paga por mensagem → não consegue dar notificações frequentes sem custo explodir
+- Quem depende de iFood não tem acesso ao WhatsApp do cliente
+- Quem faz só catálogo não tem o motor de fila
+- Quem faz só fila não tem o catálogo nem o bot
+
+Estamos construindo as camadas de baixo primeiro. Cada produto novo que adicionarmos vai custar quase zero operacional a mais — diferente de um concorrente que teria que renegociar contratos com terceiros para cada feature nova.
 
 ### Nossos diferenciais concretos
 
@@ -234,8 +288,9 @@ Nenhum concorrente entrega hoje:
 | Sem comissão por pedido | Vendedor não perde % de cada venda |
 | WhatsApp do vendedor | Cliente fala com a loja, não com plataforma anônima |
 | Bot com IA | Atendimento automático em linguagem natural, 24h |
-| Notificação de fila | Cliente sabe onde está o pedido sem perguntar |
-| Fila unificada | Todos os canais numa tela, sem bagunça |
+| Notificação de posição na fila | Cliente sabe onde está sem perguntar — elimina o "cadê meu pedido?" |
+| Uma ação, três resultados | Vendedor atualiza status → fila, bot e cliente sincronizam sozinhos |
+| Fila unificada | Catálogo + WhatsApp direto + manual na mesma tela |
 | Kit white-label | Vendedor vê a marca dele, não a nossa |
 | Ultra-personalizável | Funciona para qualquer nicho — não só alimentação |
 | Open source base | Não dependemos de nenhuma empresa para o core funcionar |
