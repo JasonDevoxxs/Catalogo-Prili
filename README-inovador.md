@@ -6,18 +6,33 @@
 
 ## O que estamos construindo
 
-Um **ecossistema de vendas digital para pequenos e médios vendedores** — começando pelo Tonynhos Bar como caso piloto, evoluindo para um kit completo que pode ser vendido/licenciado para qualquer negócio similar.
+Um **ecossistema digital completo para qualquer tipo de estabelecimento** — começando pelo Tonynhos Bar como caso piloto, evoluindo para um kit ultra-personalizável que funciona para alimentação, barbearias, oficinas, lojas, assistência técnica e qualquer negócio com atendimento presencial ou por encomenda.
 
-O kit é composto de três produtos integrados:
+O kit é composto de produtos integrados que o vendedor contrata conforme precisa:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  1. Catálogo Digital          (já em construção)    │
-│  2. Sistema de Gestão de Pedidos     (próximo)      │
-│  3. Bot de WhatsApp Próprio          (próximo)      │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│  1. Catálogo / Cardápio Digital    (já em construção)    │
+│  2. Site Institucional             (produto separado)    │
+│  3. Sistema de Gestão + Fila       (próximo)             │
+│  4. Bot WhatsApp com IA            (próximo)             │
+│  5. Pix Automatizado               (feature premium)     │
+└──────────────────────────────────────────────────────────┘
          ↕ todos falam entre si em tempo real
 ```
+
+### Para quais nichos funciona
+O sistema é genérico por design — muda só o vocabulário:
+
+| Estabelecimento | "Pedido" | Status da fila |
+|----------------|----------|----------------|
+| Pastelaria / Lanchonete | Itens do cardápio | Recebido → Preparando → Pronto → Entregue |
+| Barbearia / Salão | Horário de corte | Aguardando → Em atendimento → Finalizado |
+| Oficina mecânica | Serviço no veículo | Recebido → Em revisão → Pronto → Retirado |
+| Assistência técnica | Aparelho para conserto | Recebido → Orçado → Em reparo → Pronto |
+| Loja com retirada | Pedido online | Recebido → Separando → Pronto para retirada |
+
+**Ultra-personalizável para qualquer nicho** — a lógica é sempre a mesma, o kit se adapta.
 
 ---
 
@@ -34,66 +49,65 @@ Toda solução pronta no mercado depende de plataformas externas:
 Construir a infra própria sempre que possível, eliminar intermediários:
 
 | Função | Solução de terceiro (custo) | Nossa solução (custo) |
-|--------|----------------------------|----------------------|
+|--------|----------------------------|-----------------------|
 | Bot WhatsApp | Z-API ~R$100/mês | Evolution API self-hosted — **grátis** |
+| IA no bot | OpenAI API ~R$0,10/msg | Modelo local (LLaMA) — **grátis** |
 | Gestão de pedidos | Sistemas SaaS ~R$200/mês | Sistema próprio — **grátis** |
 | Catálogo digital | Cardápio Web ~R$150/mês | Kit próprio — **grátis** |
+| Site institucional | Agências ~R$3.000+ | Produto próprio — custo de hora |
 | Hospedagem | Serviços caros | VPS Hetzner ~**R$25/mês** |
 | Pix (automatizado) | Mercado Pago ~1% | Efí Bank ~0,5% (negociável) |
 
-> **Pix manual (cliente paga direto na chave do vendedor): sempre gratuito, sem intermediários.** A taxa só aparece se quiser confirmação automática sem intervenção humana — feature premium futura.
+> **Pix manual (cliente paga direto na chave do vendedor): sempre gratuito, sem intermediários.** A taxa só aparece se quiser confirmação automática — feature premium futura.
 
 ---
 
-## 2. WhatsApp Bot — Tecnologia e Estratégia
+## 2. Produto — Site Institucional
 
-### Como funciona sem pagar nada
-O **Evolution API** é open source e se conecta ao WhatsApp via protocolo do WhatsApp Web (mesma tecnologia que o WhatsApp no computador). Roda no nosso servidor, sem custo por mensagem.
+Além do catálogo interativo, muitos vendedores precisam de um **site institucional** — página com história da empresa, serviços, fotos, contato, localização no mapa, horário de funcionamento.
 
-### Modelo de números
-Cada vendedor **usa o próprio número WhatsApp Business** — sem estoque de números nosso. O vendedor escaneia um QR Code no painel e conecta. Vantagem:
-- Se o número for banido, afeta só aquele vendedor, não os outros
-- O vendedor já tem o número que os clientes conhecem
-- Zero custo e zero responsabilidade nossa sobre os números
+O catálogo e o site são produtos diferentes e complementares:
+- **Catálogo:** cliente navega, monta pedido, finaliza pelo WhatsApp
+- **Site:** apresentação da marca, aparece no Google, passa credibilidade
 
-### Aquecimento de números novos
-Números novos precisam de um período de aquecimento para o WhatsApp não suspeitar de automação. Como controlamos o código, programamos isso com precisão:
+O vendedor que já tem o catálogo naturalmente vai querer o site depois — e você já tem o cliente. Venda cruzada natural, receita adicional da mesma base.
 
-```
-Semana 1:  até 15 mensagens/dia    delay 4–10s entre cada
-Semana 2:  até 40 mensagens/dia    delay 3–7s entre cada
-Semana 3+: limite elástico baseado no histórico do número
-```
-
-Para PME (pequeno e médio varejo), o volume de pedidos natural já respeita esses limites — o aquecimento acontece organicamente com o uso. Mensagens de confirmação de pedido são classificadas como **transacionais** pelo WhatsApp (não spam), o que reduz muito o risco de ban.
-
-### Anti-ban embutido no kit
-O que será programado direto na nossa solução:
-- Delay aleatório entre mensagens (não robótico)
-- Nunca enviar em rajada
-- Monitoramento de saúde do número
-- Número de backup ativado automaticamente se detectar problema
-- Evitar broadcasts — só mensagens 1:1 em resposta a ações do cliente
+**Modelo de entrega:** site estático (mesmo stack do catálogo), hospedado no GitHub Pages ou VPS, entregue como parte do kit ou cobrado separado como serviço avulso.
 
 ---
 
-## 3. Hospedagem — Próprio vs Alugado
+## 3. WhatsApp Bot com IA
 
-### Computador/Raspberry Pi em casa
-Já foi provado que funciona. Limitações para uso profissional:
-- IP dinâmico (ISP muda o endereço — precisa DDNS)
-- Cai a luz = serviço cai
-- Hardware falha = perdeu tudo sem aviso
-- Internet residencial sem SLA
+### Além de automação — inteligência real
+O bot não precisa ser apenas um roteador de mensagens. Com um modelo de linguagem integrado (IA), ele consegue:
 
-### VPS alugada (recomendado para produto comercial)
-Uma VPS na **Hetzner** por ~R$25/mês entrega:
-- IP fixo sempre disponível
-- Datacenter com gerador (uptime ~99,9%)
-- Backup automático
-- Escala com um clique quando crescer
+- **Entender pedidos em linguagem natural** — cliente digita "quero 2 de frango e 1 especial" e o bot interpreta, confirma e insere na fila
+- **Responder dúvidas sobre o cardápio/serviços** — "tem pastel de queijo?" sem precisar o vendedor responder
+- **Qualificar o cliente** — coletar nome, endereço, forma de pagamento em conversa natural
+- **Tom de voz da marca** — responde como se fosse um atendente da própria loja
 
-**Conclusão:** durante desenvolvimento, próprio PC resolve. Quando lançar para vendedores pagantes, VPS é mais barato e profissional do que comprar hardware dedicado (Raspberry Pi ~R$500 + risco de downtime em casa).
+### Opções de IA (do mais simples ao mais poderoso)
+| Opção | Custo | Quando usar |
+|-------|-------|-------------|
+| Respostas fixas (regras) | Grátis | Volume baixo, pedidos padronizados |
+| API Claude / OpenAI | ~R$0,05–0,15 por conversa | Quando quer qualidade máxima |
+| Modelo local (LLaMA, Mistral) | Grátis após setup | Quando volume justifica servidor dedicado |
+
+**Estratégia:** começar com respostas fixas + fluxo guiado (menu numerado), evoluir para IA conforme o kit cresce. O sistema já estará preparado para trocar o motor de resposta sem reescrever tudo.
+
+### Notificações de posição na fila — diferencial de experiência
+A cada pedido concluído, o bot avisa automaticamente quem está na fila:
+
+```
+Bot → Cliente #3: "Boa notícia! Você subiu na fila e agora é o #2.
+                   Tempo estimado: ~8 minutos. 🕐"
+
+Bot → Cliente #1: "Seu pedido está sendo preparado agora! 🔥"
+
+Bot → Cliente #1: "Pronto! Seu pedido está te esperando. 🎉"
+```
+
+Isso **elimina a pergunta mais comum no WhatsApp do vendedor:** "cadê meu pedido?" — que hoje toma tempo e irrita os dois lados.
 
 ---
 
@@ -114,36 +128,37 @@ Sem sistema, vira bagunça. Com o nosso:
                          ↓
               FILA CENTRAL (banco de dados)
                          ↓
-         ┌───────────────────────────────┐
-         │     Painel do Vendedor        │
-         │     (tempo real)              │
-         │                               │
-         │  🟡 #01 João — Pastel frango  │ ← move
-         │  🔵 #02 Maria — 2x Carne      │ ← move
-         │  🟡 #03 Pedro — Pastel doce   │
-         │  [ + Adicionar pedido ]       │
-         └───────────────────────────────┘
+         ┌───────────────────────────────────┐
+         │       Painel do Vendedor          │
+         │       (tempo real)                │
+         │                                   │
+         │  🟡 #01 João  — Pastel frango     │ ← move
+         │  🔵 #02 Maria — 2x Carne          │ ← move
+         │  🟡 #03 Pedro — Pastel doce       │
+         │  [ + Adicionar pedido ]           │
+         └───────────────────────────────────┘
                          ↓
-         WhatsApp confirma status ao cliente
+         Bot avisa cliente automaticamente a cada mudança
 ```
 
 ### Funcionalidades da fila
 - **Drag-and-drop** para reordenar com agilidade
-- **Status por pedido:** Recebido → Preparando → Pronto → Entregue
+- **Status por pedido:** personalizável por nicho (Recebido → Preparando → Pronto → Entregue)
 - **Adicionar pedido manual** (cliente chegou pessoalmente ou ligou)
-- **Contador de tempo** em cada etapa (saber quanto tempo cada pedido leva)
-- **Notificação automática** ao cliente quando status muda (ex: "Seu pedido está pronto!")
-- **Sincronização em tempo real** entre catálogo, bot e painel — os três sabem da fila ao mesmo tempo
+- **Contador de tempo** em cada etapa — saber quanto tempo cada pedido leva em média
+- **Notificação automática** ao cliente a cada mudança de status via WhatsApp
+- **Aviso de posição na fila** — cliente recebe atualização conforme a fila avança
+- **Sincronização em tempo real** entre catálogo, bot e painel
 
 ### Como o WhatsApp direto entra na fila
 ```
 Cliente envia pedido pelo WhatsApp
         ↓
-Bot lê a mensagem e identifica os itens
+Bot (com IA) lê a mensagem e identifica os itens
         ↓
 Insere automaticamente no FINAL da fila
         ↓
-Responde ao cliente: "Pedido recebido! Você é o #4 na fila."
+Responde ao cliente: "Pedido recebido! Você é o #4 na fila. ✅"
         ↓
 Painel do vendedor atualiza em tempo real
         ↓
@@ -167,38 +182,77 @@ Negociar taxas menores com o volume acumulado. Empresas que processam volumes al
 
 ---
 
-## 6. Mercado e Diferenciais
+## 6. Hospedagem — Próprio vs Alugado
 
-### Quem já faz algo parecido
-- **Anota AI** — bot WhatsApp + cardápio para restaurantes. Foi **adquirida por valor de 8 dígitos em reais**.
-- **Cardápio Web** — catálogo digital para restaurantes. Cobra ~R$150/mês por vendedor.
+### Computador/Raspberry Pi em casa
+Já foi provado que funciona. Limitações para uso profissional:
+- IP dinâmico (ISP muda o endereço — precisa DDNS)
+- Cai a luz = serviço cai
+- Hardware falha = perdeu tudo sem aviso
+- Internet residencial sem SLA
+
+### VPS alugada (recomendado para produto comercial)
+Uma VPS na **Hetzner** por ~R$25/mês entrega:
+- IP fixo sempre disponível
+- Datacenter com gerador (uptime ~99,9%)
+- Backup automático
+- Escala com um clique quando crescer
+
+**Conclusão:** durante desenvolvimento, próprio PC resolve. Quando lançar para vendedores pagantes, VPS é mais profissional e frequentemente mais barato do que manter hardware dedicado em casa.
+
+---
+
+## 7. Mercado e Diferenciais
+
+### Concorrentes por segmento
+
+**Alimentação:**
+- **Anota AI** — bot WhatsApp + cardápio para restaurantes. Foi **adquirida por valor de 8 dígitos em reais**. Dependia de terceiros para tudo.
+- **Cardápio Web** — catálogo digital. Cobra ~R$150/mês. Sem bot, sem fila.
 - **Goomer** — menu digital. Cobra comissão + mensalidade.
-- **iFood** — marketplace. Cobra 12–30% por pedido (os vendedores odeiam).
+- **iFood** — marketplace. Cobra 12–30% por pedido. Vendedores odeiam a dependência.
+
+**Barbearias / Salões:**
+- **Trinks, iGestor, Salonized** — agendamento online. Cobram mensalidade, sem WhatsApp nativo, sem fila em tempo real.
+
+**Oficinas / Assistência técnica:**
+- Mercado sub-atendido. Maioria usa caderno ou WhatsApp manual. Zero concorrência direta com o que estamos construindo.
+
+### Gap que o mercado não preenche
+Nenhum concorrente entrega hoje:
+- Fila unificada (catálogo + WhatsApp direto + manual) numa tela só
+- Notificação automática de posição na fila via WhatsApp do próprio vendedor
+- Infraestrutura própria sem comissão por pedido
+- Kit adaptável para qualquer nicho (não só restaurantes)
+- White-label real (vendedor vê a marca dele)
 
 ### Nossos diferenciais concretos
+
 | Diferencial | O que significa na prática |
 |------------|---------------------------|
 | Infraestrutura própria | Custo operacional menor = margem maior = preço mais competitivo |
 | Sem comissão por pedido | Vendedor não perde % de cada venda |
-| WhatsApp do vendedor | Cliente fala com a loja, não com plataforma |
-| Fila unificada | Pedidos do catálogo + WhatsApp direto + manual na mesma tela |
+| WhatsApp do vendedor | Cliente fala com a loja, não com plataforma anônima |
+| Bot com IA | Atendimento automático em linguagem natural, 24h |
+| Notificação de fila | Cliente sabe onde está o pedido sem perguntar |
+| Fila unificada | Todos os canais numa tela, sem bagunça |
 | Kit white-label | Vendedor vê a marca dele, não a nossa |
+| Ultra-personalizável | Funciona para qualquer nicho — não só alimentação |
 | Open source base | Não dependemos de nenhuma empresa para o core funcionar |
-
-### O nicho
-PME de alimentação e varejo presencial no Brasil que precisa de presença digital mas não quer (ou não consegue) pagar as taxas dos grandes marketplaces. Mercado gigante, sub-atendido, e com forte cultura de WhatsApp — nosso produto resolve exatamente o problema deles.
 
 ---
 
-## 7. Ordem de Construção
+## 8. Ordem de Construção
 
 ```
-[✅] Catálogo Digital           ← piloto Tonynhos Bar
-[ ] Backend + Banco de Dados   ← fila, pedidos, vendedores
-[ ] Painel de Gestão           ← interface do vendedor, fila tempo real
-[ ] Bot WhatsApp               ← Evolution API conectado à fila
-[ ] Pix Automático             ← feature premium, Efí Bank
-[ ] Kit White-label            ← empacotar para novos vendedores
+[✅] Catálogo Digital              ← piloto Tonynhos Bar
+[ ] Backend + Banco de Dados      ← fila, pedidos, vendedores
+[ ] Painel de Gestão              ← interface do vendedor, fila tempo real
+[ ] Bot WhatsApp + IA             ← Evolution API + modelo de linguagem
+[ ] Notificações de posição       ← aviso automático conforme fila avança
+[ ] Pix Automático                ← feature premium, Efí Bank
+[ ] Site Institucional            ← produto separado para vendedores
+[ ] Kit White-label               ← empacotar para novos vendedores
 ```
 
 ---
