@@ -103,6 +103,15 @@
   </div>
 </section>
 
+<!-- ============ LETREIRO ============ -->
+<div class="ticker-wrap">
+  <div class="ticker-border ticker-border-top"></div>
+  <div class="ticker-track">
+    <div class="ticker-content" id="ticker-content"></div>
+  </div>
+  <div class="ticker-border ticker-border-bottom"></div>
+</div>
+
 <!-- ============ CATEGORIAS ============ -->
 <nav id="categorias-nav" aria-label="Categorias">
   <div class="categorias-lista">
@@ -121,22 +130,49 @@
 
   <!-- Destaques -->
   <section id="secao-destaques" class="hidden">
-    <h2 class="secao-titulo reveal">
-      <span class="titulo-icon">⭐</span>
-      Destaques
-      <span class="titulo-line"></span>
-    </h2>
+    <div class="secao-titulo-wrap reveal">
+      <div class="secao-ornamento">
+        <span class="orn-line"></span><span class="orn-diamond">◆</span>
+      </div>
+      <h2 class="secao-titulo">
+        <span class="titulo-icon-wrap">⭐</span>
+        <span class="titulo-text">Destaques</span>
+      </h2>
+      <div class="secao-ornamento secao-ornamento-right">
+        <span class="orn-diamond">◆</span><span class="orn-line"></span>
+      </div>
+    </div>
     <div id="grid-destaques" class="produtos-grid"></div>
   </section>
 
   <!-- Cardápio -->
   <section id="secao-produtos" style="margin-top: 2.5rem">
-    <h2 class="secao-titulo reveal" id="titulo-cardapio">
-      <span class="titulo-icon">🍽</span>
-      Cardápio
-      <span class="titulo-line"></span>
-    </h2>
-    <div id="grid-produtos" class="produtos-grid"></div>
+    <div class="secao-header">
+      <div class="secao-titulo-wrap reveal" id="titulo-cardapio">
+        <div class="secao-ornamento">
+          <span class="orn-line"></span><span class="orn-diamond">◆</span>
+        </div>
+        <h2 class="secao-titulo">
+          <span class="titulo-icon-wrap">🍽</span>
+          <span class="titulo-text">Cardápio</span>
+        </h2>
+        <div class="secao-ornamento secao-ornamento-right">
+          <span class="orn-diamond">◆</span><span class="orn-line"></span>
+        </div>
+      </div>
+      <div class="layout-toggle" aria-label="Escolher layout">
+        <button class="layout-btn" data-layout="2" title="2 colunas">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="7" height="7" rx="1"/><rect x="9" y="0" width="7" height="7" rx="1"/><rect x="0" y="9" width="7" height="7" rx="1"/><rect x="9" y="9" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button class="layout-btn ativo" data-layout="3" title="3 colunas">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="4" height="7" rx="1"/><rect x="6" y="0" width="4" height="7" rx="1"/><rect x="12" y="0" width="4" height="7" rx="1"/><rect x="0" y="9" width="4" height="7" rx="1"/><rect x="6" y="9" width="4" height="7" rx="1"/><rect x="12" y="9" width="4" height="7" rx="1"/></svg>
+        </button>
+        <button class="layout-btn" data-layout="1" title="Lista">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="16" height="4" rx="1"/><rect x="0" y="6" width="16" height="4" rx="1"/><rect x="0" y="12" width="16" height="4" rx="1"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="grid-produtos" class="produtos-grid layout-3"></div>
     <div id="sem-resultados" class="hidden">
       <div class="icon">🔍</div>
       <h3>Nada encontrado</h3>
@@ -300,6 +336,44 @@
       /* Remove classe ao fim */
       ripple.addEventListener('animationend', () => ripple.classList.remove('ativo'), { once: true });
     });
+  })();
+</script>
+
+<script>
+  /* ── Letreiro ── */
+  (function () {
+    const items = [
+      '✦ Tonynhos Bar',
+      '📍 Rua José Ernesto dos Santos Filho, 40',
+      '🕐 17:00 – 22:00',
+      '📞 (19) 98299-2356',
+      '📸 @tonynhosbar_',
+      '✦ Pastelaria do MP',
+      '⭐ Feito com muito carinho',
+    ];
+    const track = document.getElementById('ticker-content');
+    if (!track) return;
+    const html = items.map(i => `<span class="ticker-item">${i}</span>`).join('');
+    track.innerHTML = html + html + html;
+  })();
+
+  /* ── Seletor de layout ── */
+  (function () {
+    const CHAVE = 'catalogo-layout';
+    const grids = () => document.querySelectorAll('.produtos-grid');
+    const btns  = document.querySelectorAll('.layout-btn');
+    const saved = localStorage.getItem(CHAVE) || '3';
+
+    function aplicar(layout) {
+      grids().forEach(g => {
+        g.classList.remove('layout-1','layout-2','layout-3');
+        g.classList.add('layout-' + layout);
+      });
+      btns.forEach(b => b.classList.toggle('ativo', b.dataset.layout === layout));
+      localStorage.setItem(CHAVE, layout);
+    }
+    aplicar(saved);
+    btns.forEach(b => b.addEventListener('click', () => aplicar(b.dataset.layout)));
   })();
 </script>
 
