@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Login</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <img id="login-logo" src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+      <h1 id="login-nome">Painel Admin</h1>
+      <p>Acesso restrito à equipe</p>
+    </div>
+
+    <div id="login-erro" class="login-erro"></div>
+
+    <form id="form-login">
+      <div class="form-grupo">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" class="form-input" placeholder="admin@exemplo.com" required autocomplete="email">
+      </div>
+      <div class="form-grupo">
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-login" id="btn-entrar">Entrar</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import CONFIG from '../js/config.js';
+
+    const supabase = createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
+
+    /* redireciona se já logado */
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) location.href = 'dashboard.html';
+
+    /* nome da loja no login */
+    document.getElementById('login-nome').textContent = CONFIG.nomeLoja || 'Painel Admin';
+
+    document.getElementById('form-login').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-entrar');
+      const erro = document.getElementById('login-erro');
+      erro.classList.remove('visivel');
+      btn.disabled = true;
+      btn.textContent = 'Entrando…';
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('senha').value,
+      });
+
+      if (error) {
+        erro.textContent = 'E-mail ou senha incorretos.';
+        erro.classList.add('visivel');
+        btn.disabled = false;
+        btn.textContent = 'Entrar';
+      } else {
+        location.href = 'dashboard.html';
+      }
+    });
+  </script>
+</body>
+</html>

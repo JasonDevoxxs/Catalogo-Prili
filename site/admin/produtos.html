@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos — Admin</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span id="sb-nome">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"   class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Dashboard</span></a>
+      <a href="produtos.html"    class="nav-item ativo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Produtos</span></a>
+      <a href="categorias.html"  class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Categorias</span></a>
+      <a href="configuracoes.html" class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Configurações</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="btn-logout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <span class="page-title">Produtos</span>
+      <span class="topbar-user" id="user-email"></span>
+    </div>
+    <div class="admin-content">
+      <div class="card-tabela">
+        <div class="tabela-header">
+          <h2>Lista de produtos</h2>
+          <div class="tabela-acoes">
+            <input type="search" id="busca-produto" class="input-busca-admin" placeholder="Buscar…">
+            <button class="btn btn-primario" id="btn-novo-produto">+ Novo produto</button>
+          </div>
+        </div>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Destaque</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-produtos"><tr><td colspan="7" style="text-align:center;padding:2rem;color:#9ca3af">Carregando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal produto -->
+<div id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-titulo">Novo produto</h3>
+      <button class="btn-fechar-modal" id="btn-fechar-modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form id="form-produto">
+      <div class="modal-corpo">
+        <div class="form-grupo">
+          <label>Imagem do produto</label>
+          <div class="upload-area" id="upload-area">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Clique ou arraste uma imagem</p>
+            <img id="preview-img" style="display:none">
+            <input type="file" id="input-imagem" accept="image/*" style="display:none">
+          </div>
+        </div>
+        <div class="form-grupo">
+          <label for="p-nome">Nome *</label>
+          <input id="p-nome" class="form-input" type="text" placeholder="Ex: Pastel de queijo" required>
+        </div>
+        <div class="form-grupo">
+          <label for="p-descricao">Descrição</label>
+          <textarea id="p-descricao" class="form-textarea" placeholder="Ingredientes, tamanho, etc."></textarea>
+        </div>
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label for="p-preco">Preço (R$) *</label>
+            <input id="p-preco" class="form-input" type="number" step="0.01" min="0" placeholder="0,00" required>
+          </div>
+          <div class="form-grupo">
+            <label for="p-categoria">Categoria *</label>
+            <select id="p-categoria" class="form-select" required>
+              <option value="">Selecione…</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label for="p-ordem">Ordem de exibição</label>
+            <input id="p-ordem" class="form-input" type="number" min="0" value="0">
+          </div>
+          <div class="form-grupo" style="justify-content:flex-end;padding-top:1.4rem">
+            <label style="display:flex;gap:.5rem;align-items:center;cursor:pointer">
+              <input type="checkbox" id="p-destaque"> Destaque
+            </label>
+            <label style="display:flex;gap:.5rem;align-items:center;cursor:pointer;margin-top:.5rem">
+              <input type="checkbox" id="p-ativo" checked> Ativo
+            </label>
+            <label style="display:flex;gap:.5rem;align-items:center;cursor:pointer;margin-top:.5rem">
+              <input type="checkbox" id="p-disponivel" checked> Disponível
+            </label>
+          </div>
+        </div>
+        <input type="hidden" id="p-id">
+        <input type="hidden" id="p-imagem-url">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secundario" id="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn btn-primario" id="btn-salvar-produto">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-admin"></div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import CONFIG from '../js/config.js';
+  const supabase = createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
+
+  /* auth */
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) { location.href = 'index.html'; }
+  document.getElementById('user-email').textContent = session.user.email;
+  document.getElementById('sb-nome').textContent = CONFIG.nomeLoja || 'Admin';
+  document.getElementById('btn-logout').addEventListener('click', async () => {
+    await supabase.auth.signOut(); location.href = 'index.html';
+  });
+
+  let todosProdutos = [];
+  let categorias = [];
+  let arquivoImagem = null;
+
+  /* ---- CARREGAR ---- */
+  async function carregar() {
+    const [{ data: prods }, { data: cats }] = await Promise.all([
+      supabase.from('produtos').select('*, categorias(nome)').order('ordem'),
+      supabase.from('categorias').select('id, nome').eq('ativo', true).order('nome'),
+    ]);
+    todosProdutos = prods || [];
+    categorias = cats || [];
+    renderTabela(todosProdutos);
+    popularSelectCategorias();
+  }
+  carregar();
+
+  function popularSelectCategorias() {
+    const sel = document.getElementById('p-categoria');
+    sel.innerHTML = '<option value="">Selecione…</option>';
+    categorias.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.id; opt.textContent = c.nome;
+      sel.appendChild(opt);
+    });
+  }
+
+  /* ---- TABELA ---- */
+  function renderTabela(lista) {
+    const tbody = document.getElementById('tbody-produtos');
+    if (!lista.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:#9ca3af">Nenhum produto cadastrado.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = lista.map(p => `
+      <tr>
+        <td><img src="${p.imagem_url || ''}" onerror="this.style.display='none'" alt="${p.nome}"></td>
+        <td>${p.nome}</td>
+        <td>${p.categorias?.nome || '—'}</td>
+        <td>R$ ${Number(p.preco).toFixed(2).replace('.',',')}</td>
+        <td><span class="badge ${p.ativo ? 'verde' : 'vermelho'}">${p.ativo ? 'Ativo' : 'Inativo'}</span></td>
+        <td>${p.destaque ? '⭐' : '—'}</td>
+        <td>
+          <div class="acoes-td">
+            <button class="btn-icon" onclick="editarProduto('${p.id}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button class="btn-icon perigo" onclick="excluirProduto('${p.id}', '${p.nome.replace(/'/g,"\\'")}')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  /* busca */
+  document.getElementById('busca-produto').addEventListener('input', e => {
+    const t = e.target.value.toLowerCase();
+    renderTabela(todosProdutos.filter(p => p.nome.toLowerCase().includes(t)));
+  });
+
+  /* ---- MODAL ---- */
+  function abrirModal(produto = null) {
+    document.getElementById('modal-overlay').classList.add('visivel');
+    document.getElementById('modal-titulo').textContent = produto ? 'Editar produto' : 'Novo produto';
+    document.getElementById('form-produto').reset();
+    document.getElementById('preview-img').style.display = 'none';
+    arquivoImagem = null;
+
+    if (produto) {
+      document.getElementById('p-id').value = produto.id;
+      document.getElementById('p-nome').value = produto.nome;
+      document.getElementById('p-descricao').value = produto.descricao || '';
+      document.getElementById('p-preco').value = produto.preco;
+      document.getElementById('p-categoria').value = produto.categoria_id || '';
+      document.getElementById('p-ordem').value = produto.ordem ?? 0;
+      document.getElementById('p-destaque').checked = produto.destaque;
+      document.getElementById('p-ativo').checked = produto.ativo;
+      document.getElementById('p-disponivel').checked = produto.disponivel !== false;
+      document.getElementById('p-imagem-url').value = produto.imagem_url || '';
+      if (produto.imagem_url) {
+        const img = document.getElementById('preview-img');
+        img.src = produto.imagem_url; img.style.display = 'block';
+      }
+    } else {
+      document.getElementById('p-id').value = '';
+      document.getElementById('p-imagem-url').value = '';
+    }
+  }
+
+  function fecharModal() {
+    document.getElementById('modal-overlay').classList.remove('visivel');
+  }
+
+  document.getElementById('btn-novo-produto').addEventListener('click', () => abrirModal());
+  document.getElementById('btn-fechar-modal').addEventListener('click', fecharModal);
+  document.getElementById('btn-cancelar').addEventListener('click', fecharModal);
+  document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) fecharModal(); });
+
+  /* upload imagem */
+  const uploadArea = document.getElementById('upload-area');
+  const inputImg = document.getElementById('input-imagem');
+  uploadArea.addEventListener('click', () => inputImg.click());
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = '#e63946'; });
+  uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; });
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault(); uploadArea.style.borderColor = '';
+    if (e.dataTransfer.files[0]) setArquivo(e.dataTransfer.files[0]);
+  });
+  inputImg.addEventListener('change', e => { if (e.target.files[0]) setArquivo(e.target.files[0]); });
+
+  function setArquivo(file) {
+    arquivoImagem = file;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.getElementById('preview-img');
+      img.src = ev.target.result; img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ---- SALVAR ---- */
+  document.getElementById('form-produto').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-salvar-produto');
+    btn.disabled = true; btn.textContent = 'Salvando…';
+
+    let imagemUrl = document.getElementById('p-imagem-url').value;
+
+    /* upload da imagem se houver arquivo novo */
+    if (arquivoImagem) {
+      const ext = arquivoImagem.name.split('.').pop();
+      const path = `produtos/${Date.now()}.${ext}`;
+      const { error: upErr } = await supabase.storage.from('imagens').upload(path, arquivoImagem, { upsert: true });
+      if (upErr) {
+        toast('Erro ao fazer upload da imagem.', 'erro');
+        btn.disabled = false; btn.textContent = 'Salvar';
+        return;
+      }
+      const { data: urlData } = supabase.storage.from('imagens').getPublicUrl(path);
+      imagemUrl = urlData.publicUrl;
+    }
+
+    const payload = {
+      nome: document.getElementById('p-nome').value.trim(),
+      descricao: document.getElementById('p-descricao').value.trim() || null,
+      preco: parseFloat(document.getElementById('p-preco').value),
+      categoria_id: document.getElementById('p-categoria').value || null,
+      ordem: parseInt(document.getElementById('p-ordem').value) || 0,
+      destaque: document.getElementById('p-destaque').checked,
+      ativo: document.getElementById('p-ativo').checked,
+      disponivel: document.getElementById('p-disponivel').checked,
+      imagem_url: imagemUrl || null,
+    };
+
+    const id = document.getElementById('p-id').value;
+    const { error } = id
+      ? await supabase.from('produtos').update(payload).eq('id', id)
+      : await supabase.from('produtos').insert(payload);
+
+    if (error) {
+      toast('Erro ao salvar: ' + error.message, 'erro');
+    } else {
+      toast('Produto salvo com sucesso!', 'sucesso');
+      fecharModal();
+      carregar();
+    }
+    btn.disabled = false; btn.textContent = 'Salvar';
+  });
+
+  /* ---- EDITAR / EXCLUIR (globais) ---- */
+  window.editarProduto = (id) => {
+    const p = todosProdutos.find(x => x.id === id);
+    if (p) abrirModal(p);
+  };
+
+  window.excluirProduto = async (id, nome) => {
+    if (!confirm(`Excluir "${nome}"?`)) return;
+    const { error } = await supabase.from('produtos').delete().eq('id', id);
+    if (error) toast('Erro ao excluir.', 'erro');
+    else { toast('Produto excluído.', 'sucesso'); carregar(); }
+  };
+
+  /* ---- TOAST ---- */
+  function toast(msg, tipo = '') {
+    const el = document.getElementById('toast-admin');
+    el.textContent = msg;
+    el.className = `visivel ${tipo}`;
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.className = '', 2500);
+  }
+</script>
+</body>
+</html>

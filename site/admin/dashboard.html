@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Admin</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span id="sb-nome">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"   class="nav-item ativo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="produtos.html"    class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span>Produtos</span>
+      </a>
+      <a href="categorias.html"  class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>Categorias</span>
+      </a>
+      <a href="configuracoes.html" class="nav-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Configurações</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="btn-logout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <span class="page-title">Dashboard</span>
+      <span class="topbar-user" id="user-email"></span>
+    </div>
+    <div class="admin-content">
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="icone">📦</div>
+          <div class="label">Produtos ativos</div>
+          <div class="valor" id="stat-produtos">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="icone">📁</div>
+          <div class="label">Categorias</div>
+          <div class="valor" id="stat-categorias">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="icone">⭐</div>
+          <div class="label">Destaques</div>
+          <div class="valor" id="stat-destaques">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="icone">🚫</div>
+          <div class="label">Indisponíveis</div>
+          <div class="valor" id="stat-indisponiveis">—</div>
+        </div>
+      </div>
+
+      <div class="card-tabela" style="max-width:600px">
+        <div class="tabela-header"><h2>Ações rápidas</h2></div>
+        <div style="padding:1.25rem;display:flex;flex-direction:column;gap:.75rem">
+          <a href="produtos.html" class="btn btn-primario" style="width:fit-content">+ Novo produto</a>
+          <a href="categorias.html" class="btn btn-secundario" style="width:fit-content">+ Nova categoria</a>
+          <a href="../index.html" target="_blank" class="btn btn-secundario" style="width:fit-content">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Ver catálogo público
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import CONFIG from '../js/config.js';
+  const supabase = createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) { location.href = 'index.html'; }
+
+  document.getElementById('user-email').textContent = session.user.email;
+  document.getElementById('sb-nome').textContent = CONFIG.nomeLoja || 'Admin';
+
+  document.getElementById('btn-logout').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    location.href = 'index.html';
+  });
+
+  /* stats */
+  const [{ count: cProd }, { count: cCat }, { count: cDest }, { count: cIndisp }] = await Promise.all([
+    supabase.from('produtos').select('*', {count:'exact',head:true}).eq('ativo', true),
+    supabase.from('categorias').select('*', {count:'exact',head:true}).eq('ativo', true),
+    supabase.from('produtos').select('*', {count:'exact',head:true}).eq('destaque', true).eq('ativo', true),
+    supabase.from('produtos').select('*', {count:'exact',head:true}).eq('disponivel', false).eq('ativo', true),
+  ]);
+  document.getElementById('stat-produtos').textContent = cProd ?? '—';
+  document.getElementById('stat-categorias').textContent = cCat ?? '—';
+  document.getElementById('stat-destaques').textContent = cDest ?? '—';
+  document.getElementById('stat-indisponiveis').textContent = cIndisp ?? '—';
+</script>
+</body>
+</html>
