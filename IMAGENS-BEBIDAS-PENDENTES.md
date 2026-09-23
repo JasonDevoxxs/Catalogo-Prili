@@ -2,101 +2,52 @@
 
 Pasta de destino: `Catalogo-Prili/site/assets/bebidas/`
 
-Salve cada imagem com o nome exato indicado (incluindo extensão).
-Heineken já está feita — as demais estão listadas abaixo por categoria.
+Com a reestruturação para cards por categoria, agora são necessárias apenas
+**7 imagens** (uma por card). As marcas individuais são selecionadas no modal,
+não precisam de foto própria.
 
 ---
 
-## Cervejas Latas
+## Status geral
 
-| Produto | Nome do arquivo esperado |
+| Card | Arquivo esperado | Status |
+|---|---|---|
+| Cerveja Lata | `heineken-lt.jpg` | ✅ Feito (Heineken como capa) |
+| Long Neck | `heineken-long.webp` | ✅ Feito (Heineken como capa) |
+| Refrigerante | `coca-cola.png` | ❌ Pendente |
+| Suco / Isotônico | `gatorade.png` | ❌ Pendente |
+| Energético | `monster.png` | ❌ Pendente |
+| Copo Gin | `gin-dober.png` | ❌ Pendente |
+| Copo Whisky | `whi-redlabel.png` | ❌ Pendente |
+| Gelo de Coco | `gelo-coco.png` | ❌ Pendente |
+| Água S/ Gás | `agua.png` | ❌ Pendente |
+
+---
+
+## Pendentes (7 imagens)
+
+### Fotos reais do produto (buscar no Google/Gemini)
+
+| Arquivo | Sugestão |
 |---|---|
-| Original (350ml lata) | `original-lt.png` |
-| Skol (350ml lata) | `skol-lt.png` |
-| Brahma (350ml lata) | `brahma-lt.png` |
-| Antarctica (350ml lata) | `antarctica-lt.png` |
-| Spaten (350ml lata) | `spaten-lt.png` |
+| `coca-cola.png` | Lata Coca Cola 350ml gelada |
+| `gatorade.png` | Garrafa Gatorade 500ml |
+| `monster.png` | Lata Monster 473ml |
+| `gelo-coco.png` | Embalagem/produto Gelo de Coco |
+| `agua.png` | Garrafa água mineral 500ml |
 
----
+### Gerar com Gemini (copo servido, fundo escuro elegante)
 
-## Cervejas Long Neck
-
-| Produto | Nome do arquivo esperado |
+| Arquivo | Sugestão de prompt |
 |---|---|
-| Corona Long Neck (330ml) | `corona-long.png` |
-| Corona Long Neck Zero (330ml) | `corona-long-zero.png` |
+| `gin-dober.png` | "Copo de gin com gelo de coco e energético, fundo preto, iluminação dramática, estilo editorial" |
+| `whi-redlabel.png` | "Copo de whisky on the rocks com gelo de coco, fundo escuro, luz âmbar, estilo elegante" |
 
 ---
 
-## Refrigerantes
+## Observação
 
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Coca Cola Lata (350ml) | `coca-cola.png` |
-| Fanta Laranja ou Uva (350ml lata) | `fanta.png` |
-| Sprite (350ml lata) | `sprite.png` |
-| Caçulinha (garrafinha pequena) | `caculinha.png` |
-
----
-
-## Sucos & Isotônicos
-
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Gatorade (500ml garrafa) | `gatorade.png` |
-| Del Valle (290ml lata) | `delvalle.png` |
-| Bio Leve (caixinha/garrafa) | `bio-leve.png` |
-
----
-
-## Energéticos
-
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Monster (473ml lata) | `monster.png` |
-| Red Bull (250ml lata) | `redbull.png` |
-| Bally 2 Litros (garrafa 2L) | `bally-2l.png` |
-| Mansão Maromba (lata/garrafa) | `mansao-maromba.png` |
-
----
-
-## Copos Gin *(sugestão: gerar com Gemini — copo servido, fundo escuro)*
-
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Döber Gin | `gin-dober.png` |
-| Gordons Gin | `gin-gordons.png` |
-| Rocks Gin | `gin-rocks.png` |
-| Beefeater Gin | `gin-beefeater.png` |
-| Tanqueray Gin | `gin-tanqueray.png` |
-
----
-
-## Copos Whisky *(sugestão: gerar com Gemini — copo servido, fundo escuro)*
-
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Johnnie Walker Red Label | `whi-redlabel.png` |
-| Ballantines | `whi-ballantines.png` |
-| Buchanas | `whi-buchanas.png` |
-| Chivas Regal | `whi-chivas.png` |
-| Old Par | `whi-oldpar.png` |
-| Johnnie Walker Black Label | `whi-blacklabel.png` |
-
----
-
-## Extras
-
-| Produto | Nome do arquivo esperado |
-|---|---|
-| Gelo de Coco (pacote/produto) | `gelo-coco.png` |
-| Água Mineral sem Gás (500ml) | `agua.png` |
-
----
-
-## Resumo
-
-- Total de imagens pendentes: **27**
-- Já concluídas: `heineken-lt.jpg`, `heineken-long.webp`
-- Cervejas/refrigerantes/sucos/energéticos: buscar fotos reais do produto
-- Gin e Whisky: recomendado gerar com Gemini (copo servido, fundo escuro elegante)
+As imagens de Cerveja Lata e Long Neck estão usando a Heineken como capa
+temporária. Se quiser uma imagem mais genérica no futuro (ex: várias latas
+juntas), é só substituir os arquivos `heineken-lt.jpg` e `heineken-long.webp`
+por novas imagens com os mesmos nomes.
