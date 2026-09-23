@@ -315,6 +315,55 @@
 <!-- Toast -->
 <div id="toast"></div>
 
+<!-- ============ BOTTOM NAV (mobile) ============ -->
+<nav id="bottom-nav" aria-label="Navegação principal">
+  <button class="bnav-btn ativo" id="bnav-inicio" aria-label="Início">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+    <span>Início</span>
+  </button>
+  <button class="bnav-btn" id="bnav-menu" aria-label="Cardápio">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+      <rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    <span>Cardápio</span>
+  </button>
+  <button class="bnav-btn" id="bnav-busca" aria-label="Buscar">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <span>Buscar</span>
+  </button>
+  <button class="bnav-btn bnav-btn--carrinho" id="bnav-carrinho" aria-label="Pedido">
+    <span class="bnav-badge" id="bnav-badge">0</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <span>Pedido</span>
+  </button>
+</nav>
+
+<!-- ============ SEARCH OVERLAY (mobile) ============ -->
+<div id="busca-overlay" role="search" aria-label="Busca de produtos" aria-hidden="true">
+  <div class="busca-overlay-header">
+    <div class="busca-overlay-input-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input id="busca-overlay-input" type="search" placeholder="Buscar no cardápio…" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <button id="busca-overlay-fechar" type="button">Cancelar</button>
+  </div>
+  <p class="busca-overlay-hint" id="busca-overlay-hint">Digite para buscar no cardápio…</p>
+</div>
+
 <!-- Overlay para animação de troca de tema -->
 <div id="tema-ripple"></div>
 
@@ -441,6 +490,123 @@
   iniciarContatos();
   iniciarCarrinho();
   iniciarCatalogo();
+</script>
+<script>
+/* ── Bottom Nav + Search Overlay ── */
+(function () {
+  var btnInicio  = document.getElementById('bnav-inicio');
+  var btnMenu    = document.getElementById('bnav-menu');
+  var btnBusca   = document.getElementById('bnav-busca');
+  var btnCarr    = document.getElementById('bnav-carrinho');
+  var badge      = document.getElementById('bnav-badge');
+  var overlay    = document.getElementById('busca-overlay');
+  var ovInput    = document.getElementById('busca-overlay-input');
+  var ovFechar   = document.getElementById('busca-overlay-fechar');
+  var ovHint     = document.getElementById('busca-overlay-hint');
+  var inputBusca = document.getElementById('input-busca');
+
+  if (!btnInicio) return;
+
+  function setAtivo(btn) {
+    document.querySelectorAll('.bnav-btn').forEach(function (b) { b.classList.remove('ativo'); });
+    if (btn) btn.classList.add('ativo');
+  }
+
+  /* Início */
+  btnInicio.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setAtivo(btnInicio);
+  });
+
+  /* Cardápio → scroll para categorias */
+  btnMenu.addEventListener('click', function () {
+    var nav = document.getElementById('categorias-nav');
+    if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setAtivo(btnMenu);
+  });
+
+  /* Buscar → abre overlay */
+  btnBusca.addEventListener('click', function () {
+    overlay.classList.add('visivel');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setAtivo(btnBusca);
+    setTimeout(function () { ovInput.focus(); }, 350);
+  });
+
+  function fecharOverlay() {
+    overlay.classList.remove('visivel');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    ovInput.blur();
+    detectAtivo();
+  }
+
+  ovFechar.addEventListener('click', fecharOverlay);
+  ovInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') fecharOverlay();
+    if (e.key === 'Enter') fecharOverlay();
+  });
+
+  /* Sincroniza digitação com input real do catálogo */
+  ovInput.addEventListener('input', function () {
+    if (inputBusca) {
+      inputBusca.value = ovInput.value;
+      inputBusca.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    if (ovHint) {
+      ovHint.textContent = ovInput.value.trim()
+        ? 'Toque em Cancelar para ver os resultados'
+        : 'Digite para buscar no cardápio…';
+    }
+  });
+
+  /* Pedido → abre drawer */
+  btnCarr.addEventListener('click', function () {
+    var drawer  = document.getElementById('drawer-carrinho');
+    var ovl     = document.getElementById('overlay');
+    if (drawer) drawer.classList.add('aberto');
+    if (ovl)    ovl.classList.add('visivel');
+    setAtivo(btnCarr);
+  });
+
+  /* Sincroniza badge com cart-count */
+  var cartCount = document.getElementById('cart-count');
+  if (cartCount && badge) {
+    function syncBadge() {
+      var n = parseInt(cartCount.textContent) || 0;
+      badge.textContent = n;
+      badge.classList.toggle('visivel', n > 0);
+    }
+    syncBadge();
+    new MutationObserver(syncBadge).observe(cartCount, { childList: true, characterData: true, subtree: true });
+  }
+
+  /* Detecta seção ativa pelo scroll */
+  function detectAtivo() {
+    var hero    = document.getElementById('hero');
+    var secProd = document.getElementById('secao-produtos');
+    if (!hero || !secProd) return;
+    var y = window.scrollY;
+    if (y < hero.offsetHeight * 0.6) {
+      setAtivo(btnInicio);
+    } else if (y < secProd.offsetTop - 120) {
+      setAtivo(btnMenu);
+    } else {
+      setAtivo(btnMenu);
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(function () { detectAtivo(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  detectAtivo();
+})();
 </script>
 </body>
 </html>
