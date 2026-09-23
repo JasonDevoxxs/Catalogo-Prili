@@ -1492,6 +1492,11 @@ body.modal-aberto { overflow: hidden; }
   color: #fff;
 }
 .contato-fab.instagram:hover { box-shadow: 0 6px 28px rgba(220,39,67,0.6); }
+.contato-fab.is-loading {
+  pointer-events: none;
+  opacity: .55;
+  filter: grayscale(.4);
+}
 
 /* ---- TOAST ---- */
 #toast {
