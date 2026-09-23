@@ -44,54 +44,28 @@ const DEMO_PRODUTOS = [
   /* ── Pastéis Doces ── */
   { id:'d1', nome:'Nutella', descricao:'O clássico que todo mundo ama!', preco:20.00, destaque:true, ativo:true, disponivel:true, categoria_id:'c4', imagem_url:'assets/produtos/nutella.png', ordem:0, categorias:{nome:'Pastéis Doces'} },
 
-  /* ── Cervejas Latas ── */
-  { id:'cerv1', nome:'Original LT',    descricao:'Cerveja Original gelada 350ml',   preco:6.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/original-lt.png',    ordem:0, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv2', nome:'Skol LT',        descricao:'Cerveja Skol gelada 350ml',       preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/skol-lt.png',        ordem:1, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv3', nome:'Brahma LT',      descricao:'Cerveja Brahma gelada 350ml',     preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/brahma-lt.png',      ordem:2, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv4', nome:'Antarctica LT',  descricao:'Cerveja Antarctica gelada 350ml', preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/antarctica-lt.png',  ordem:3, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv5', nome:'Spaten LT',      descricao:'Cerveja Spaten gelada 350ml',     preco:7.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/spaten-lt.png',      ordem:4, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv6', nome:'Heineken LT',    descricao:'Cerveja Heineken gelada 350ml',   preco:8.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-lt.jpg',    ordem:5, categorias:{nome:'Cervejas Latas'} },
-
-  /* ── Cervejas Long Neck ── */
-  { id:'ln1', nome:'Heineken Long',     descricao:'Heineken Long Neck 330ml',      preco:9.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/heineken-long.webp',     ordem:0, categorias:{nome:'Cervejas Long Neck'} },
-  { id:'ln2', nome:'Corona Long',       descricao:'Corona Long Neck 330ml',        preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long.png',       ordem:1, categorias:{nome:'Cervejas Long Neck'} },
-  { id:'ln3', nome:'Corona Long Zero',  descricao:'Corona Long Neck Zero 330ml',   preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long-zero.png',  ordem:2, categorias:{nome:'Cervejas Long Neck'} },
+  /* ── Cervejas ── */
+  { id:'bev1', nome:'Cerveja Lata',   descricao:'Lata 350ml gelada — escolha a marca', preco:5.50, destaque:true,  ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-lt.jpg',    ordem:0, categorias:{nome:'Cervejas'} },
+  { id:'bev2', nome:'Long Neck',      descricao:'Long Neck 330ml gelada — escolha a marca', preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-long.webp', ordem:1, categorias:{nome:'Cervejas'} },
 
   /* ── Refrigerantes ── */
-  { id:'ref1', nome:'Coca Cola Lata',    descricao:'Coca Cola gelada 350ml',         preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/coca-cola.png',    ordem:0, categorias:{nome:'Refrigerantes'} },
-  { id:'ref2', nome:'Fanta Laranja/Uva', descricao:'Fanta gelada 350ml — escolha o sabor', preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/fanta.png',         ordem:1, categorias:{nome:'Refrigerantes'} },
-  { id:'ref3', nome:'Sprite',            descricao:'Sprite gelada 350ml',            preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/sprite.png',       ordem:2, categorias:{nome:'Refrigerantes'} },
-  { id:'ref4', nome:'Caçulinha',         descricao:'Refrigerante Caçulinha gelado',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/caculinha.png',    ordem:3, categorias:{nome:'Refrigerantes'} },
+  { id:'bev3', nome:'Refrigerante',   descricao:'Gelado — escolha o sabor',         preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/coca-cola.png',    ordem:0, categorias:{nome:'Refrigerantes'} },
 
   /* ── Sucos & Isotônicos ── */
-  { id:'suc1', nome:'Gatorade',      descricao:'Isotônico Gatorade gelado 500ml',   preco:8.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/gatorade.png',   ordem:0, categorias:{nome:'Sucos & Isotônicos'} },
-  { id:'suc2', nome:'Del Valle Lata', descricao:'Suco Del Valle gelado 290ml',      preco:8.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/delvalle.png',   ordem:1, categorias:{nome:'Sucos & Isotônicos'} },
-  { id:'suc3', nome:'Bio Leve',      descricao:'Suco Bio Leve natural gelado',      preco:4.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/bio-leve.png',   ordem:2, categorias:{nome:'Sucos & Isotônicos'} },
+  { id:'bev4', nome:'Suco / Isotônico', descricao:'Gelado — escolha o produto',     preco:4.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/gatorade.png',     ordem:0, categorias:{nome:'Sucos & Isotônicos'} },
 
   /* ── Energéticos ── */
-  { id:'en1', nome:'Monster',         descricao:'Energético Monster 473ml',       preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/monster.png',        ordem:0, categorias:{nome:'Energéticos'} },
-  { id:'en2', nome:'Red Bull',        descricao:'Energético Red Bull 250ml',      preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/redbull.png',        ordem:1, categorias:{nome:'Energéticos'} },
-  { id:'en3', nome:'Bally 2 Litros',  descricao:'Energético Bally 2L',           preco:18.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/bally-2l.png',       ordem:2, categorias:{nome:'Energéticos'} },
-  { id:'en4', nome:'Mansão Maromba',  descricao:'Energético Mansão Maromba',     preco:20.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/mansao-maromba.png', ordem:3, categorias:{nome:'Energéticos'} },
+  { id:'bev5', nome:'Energético',     descricao:'Gelado — escolha o produto',       preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/monster.png',      ordem:0, categorias:{nome:'Energéticos'} },
 
   /* ── Copos Gin ── */
-  { id:'gin1', nome:'Döber Gin',      descricao:'Döber + Gelo de Coco + Bally',             preco:12.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-dober.png',      ordem:0, categorias:{nome:'Copos Gin'} },
-  { id:'gin2', nome:'Gordons Gin',    descricao:'Gordons + Gelo de Coco + Bally',           preco:20.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-gordons.png',    ordem:1, categorias:{nome:'Copos Gin'} },
-  { id:'gin3', nome:'Rocks Gin',      descricao:'Rocks + Gelo de Coco + Bally',             preco:15.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-rocks.png',      ordem:2, categorias:{nome:'Copos Gin'} },
-  { id:'gin4', nome:'Beefeater Gin',  descricao:'Beefeater + Gelo de Coco + Red Bull',      preco:35.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-beefeater.png',  ordem:3, categorias:{nome:'Copos Gin'} },
-  { id:'gin5', nome:'Tanqueray Gin',  descricao:'Tanqueray + Gelo de Coco + Red Bull',      preco:45.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-tanqueray.png',  ordem:4, categorias:{nome:'Copos Gin'} },
+  { id:'bev6', nome:'Copo Gin',       descricao:'Gin + Gelo de Coco — escolha a marca', preco:12.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/gin-dober.png',  ordem:0, categorias:{nome:'Copos Gin'} },
 
   /* ── Copos Whisky ── */
-  { id:'whi1', nome:'Red Label',     descricao:'Johnnie Walker Red Label + Gelo de Coco + Red Bull',  preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-redlabel.png',     ordem:0, categorias:{nome:'Copos Whisky'} },
-  { id:'whi2', nome:'Ballantines',   descricao:'Ballantines + Gelo de Coco + Red Bull',               preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-ballantines.png',   ordem:1, categorias:{nome:'Copos Whisky'} },
-  { id:'whi3', nome:'Buchanas',      descricao:'Buchanas + Gelo de Coco + Red Bull',                  preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-buchanas.png',      ordem:2, categorias:{nome:'Copos Whisky'} },
-  { id:'whi4', nome:'Chivas',        descricao:'Chivas Regal + Gelo de Coco + Red Bull',             preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-chivas.png',        ordem:3, categorias:{nome:'Copos Whisky'} },
-  { id:'whi5', nome:'Old Par',       descricao:'Old Par + Gelo de Coco + Red Bull',                  preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-oldpar.png',        ordem:4, categorias:{nome:'Copos Whisky'} },
-  { id:'whi6', nome:'Black Label',   descricao:'Johnnie Walker Black Label + Gelo de Coco + Red Bull', preco:45.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-blacklabel.png',   ordem:5, categorias:{nome:'Copos Whisky'} },
+  { id:'bev7', nome:'Copo Whisky',    descricao:'Whisky + Gelo de Coco + Red Bull — escolha a marca', preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/whi-redlabel.png', ordem:0, categorias:{nome:'Copos Whisky'} },
 
   /* ── Extras ── */
-  { id:'ext1', nome:'Gelo de Coco',  descricao:'Gelo de Coco — escolha o sabor',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b8', imagem_url:'assets/bebidas/gelo-coco.png', ordem:0, categorias:{nome:'Extras'} },
-  { id:'ext2', nome:'Água S/ Gás',   descricao:'Água mineral sem gás 500ml',       preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b8', imagem_url:'assets/bebidas/agua.png',      ordem:1, categorias:{nome:'Extras'} },
+  { id:'bev8', nome:'Gelo de Coco',   descricao:'Gelo de Coco — escolha o sabor',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/gelo-coco.png',   ordem:0, categorias:{nome:'Extras'} },
+  { id:'bev9', nome:'Água S/ Gás',    descricao:'Água mineral sem gás 500ml',      preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/agua.png',         ordem:1, categorias:{nome:'Extras'} },
 ];
 
 const DEMO_CATEGORIAS = [
@@ -99,14 +73,13 @@ const DEMO_CATEGORIAS = [
   { id:'c2', nome:'Pastéis de Carne' },
   { id:'c3', nome:'Pastéis Especiais' },
   { id:'c4', nome:'Pastéis Doces' },
-  { id:'b1', nome:'Cervejas Latas' },
-  { id:'b2', nome:'Cervejas Long Neck' },
-  { id:'b3', nome:'Refrigerantes' },
-  { id:'b4', nome:'Sucos & Isotônicos' },
-  { id:'b5', nome:'Energéticos' },
-  { id:'b6', nome:'Copos Gin' },
-  { id:'b7', nome:'Copos Whisky' },
-  { id:'b8', nome:'Extras' },
+  { id:'b1', nome:'Cervejas' },
+  { id:'b2', nome:'Refrigerantes' },
+  { id:'b3', nome:'Sucos & Isotônicos' },
+  { id:'b4', nome:'Energéticos' },
+  { id:'b5', nome:'Copos Gin' },
+  { id:'b6', nome:'Copos Whisky' },
+  { id:'b7', nome:'Extras' },
 ];
 
 /* Adicionais de demonstração — produtos que têm opção de queijo e/ou extras */
@@ -143,24 +116,96 @@ const DEMO_ADICIONAIS = {
   c2p: [_grupoQueijo('c2p')],
   c3p: [_grupoQueijo('c3p'), _grupoExtras('c3p')],
   c8p: [_grupoQueijo('c8p')],
-  /* Fanta — escolha o sabor */
-  ref2: [{
-    id: 'g-fanta', produto_id: 'ref2', nome: 'Escolha o sabor', obrigatorio: true,
+  /* Cerveja Lata — escolha a marca (base R$5,50 = Skol/Brahma/Antarctica) */
+  bev1: [{
+    id: 'g-bev1', produto_id: 'bev1', nome: 'Escolha a marca', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-fanta-l', nome: 'Laranja',  preco_adicional: 0, disponivel: true },
-      { id: 'a-fanta-u', nome: 'Uva',      preco_adicional: 0, disponivel: true },
+      { id: 'a-bev1-skol',  nome: 'Skol 350ml',        preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev1-brah',  nome: 'Brahma 350ml',       preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev1-anta',  nome: 'Antarctica 350ml',   preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev1-orig',  nome: 'Original 350ml',     preco_adicional: 0.50, disponivel: true },
+      { id: 'a-bev1-spat',  nome: 'Spaten 350ml',       preco_adicional: 1.50, disponivel: true },
+      { id: 'a-bev1-hein',  nome: 'Heineken 350ml',     preco_adicional: 2.50, disponivel: true },
+    ],
+  }],
+  /* Long Neck — escolha a marca (base R$9,00 — todas iguais) */
+  bev2: [{
+    id: 'g-bev2', produto_id: 'bev2', nome: 'Escolha a marca', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev2-hein', nome: 'Heineken 330ml',      preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev2-cor',  nome: 'Corona 330ml',        preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev2-corz', nome: 'Corona Zero 330ml',   preco_adicional: 0.00, disponivel: true },
+    ],
+  }],
+  /* Refrigerante — escolha o sabor (base R$3,00 = Caçulinha) */
+  bev3: [{
+    id: 'g-bev3', produto_id: 'bev3', nome: 'Escolha o sabor', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev3-cacu', nome: 'Caçulinha',           preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev3-coca', nome: 'Coca Cola Lata',       preco_adicional: 2.50, disponivel: true },
+      { id: 'a-bev3-fanl', nome: 'Fanta Laranja',        preco_adicional: 2.50, disponivel: true },
+      { id: 'a-bev3-fanu', nome: 'Fanta Uva',            preco_adicional: 2.50, disponivel: true },
+      { id: 'a-bev3-spri', nome: 'Sprite',               preco_adicional: 2.50, disponivel: true },
+    ],
+  }],
+  /* Suco / Isotônico — escolha o produto (base R$4,00 = Bio Leve) */
+  bev4: [{
+    id: 'g-bev4', produto_id: 'bev4', nome: 'Escolha o produto', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev4-bio',  nome: 'Bio Leve',            preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev4-gat',  nome: 'Gatorade 500ml',      preco_adicional: 4.00, disponivel: true },
+      { id: 'a-bev4-del',  nome: 'Del Valle Lata',      preco_adicional: 4.00, disponivel: true },
+    ],
+  }],
+  /* Energético — escolha o produto (base R$12,00 = Monster/Red Bull) */
+  bev5: [{
+    id: 'g-bev5', produto_id: 'bev5', nome: 'Escolha o energético', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev5-mon',  nome: 'Monster 473ml',       preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev5-red',  nome: 'Red Bull 250ml',      preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev5-bal',  nome: 'Bally 2 Litros',      preco_adicional: 6.00, disponivel: true },
+      { id: 'a-bev5-mar',  nome: 'Mansão Maromba',      preco_adicional: 8.00, disponivel: true },
+    ],
+  }],
+  /* Copo Gin — escolha a marca (base R$12,00 = Döber) */
+  bev6: [{
+    id: 'g-bev6', produto_id: 'bev6', nome: 'Escolha o gin', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev6-dob',  nome: 'Döber + Gelo de Coco + Bally',          preco_adicional:  0.00, disponivel: true },
+      { id: 'a-bev6-roc',  nome: 'Rocks + Gelo de Coco + Bally',          preco_adicional:  3.00, disponivel: true },
+      { id: 'a-bev6-gor',  nome: 'Gordons + Gelo de Coco + Bally',        preco_adicional:  8.00, disponivel: true },
+      { id: 'a-bev6-bee',  nome: 'Beefeater + Gelo de Coco + Red Bull',   preco_adicional: 23.00, disponivel: true },
+      { id: 'a-bev6-tan',  nome: 'Tanqueray + Gelo de Coco + Red Bull',   preco_adicional: 33.00, disponivel: true },
+    ],
+  }],
+  /* Copo Whisky — escolha a marca (base R$35,00 = Red Label / Ballantines) */
+  bev7: [{
+    id: 'g-bev7', produto_id: 'bev7', nome: 'Escolha o whisky', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-bev7-rl',   nome: 'Red Label + Gelo de Coco + Red Bull',   preco_adicional:  0.00, disponivel: true },
+      { id: 'a-bev7-bal',  nome: 'Ballantines + Gelo de Coco + Red Bull', preco_adicional:  0.00, disponivel: true },
+      { id: 'a-bev7-buc',  nome: 'Buchanas + Gelo de Coco + Red Bull',    preco_adicional: 10.00, disponivel: true },
+      { id: 'a-bev7-chi',  nome: 'Chivas Regal + Gelo de Coco + Red Bull',preco_adicional: 10.00, disponivel: true },
+      { id: 'a-bev7-old',  nome: 'Old Par + Gelo de Coco + Red Bull',     preco_adicional: 10.00, disponivel: true },
+      { id: 'a-bev7-bl',   nome: 'Black Label + Gelo de Coco + Red Bull', preco_adicional: 10.00, disponivel: true },
     ],
   }],
   /* Gelo de Coco — sabores */
-  ext1: [{
-    id: 'g-gelo', produto_id: 'ext1', nome: 'Escolha o sabor', obrigatorio: true,
+  bev8: [{
+    id: 'g-bev8', produto_id: 'bev8', nome: 'Escolha o sabor', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-gelo-n',  nome: 'Natural',    preco_adicional: 0, disponivel: true },
-      { id: 'a-gelo-m',  nome: 'Morango',    preco_adicional: 0, disponivel: true },
-      { id: 'a-gelo-l',  nome: 'Limão',      preco_adicional: 0, disponivel: true },
-      { id: 'a-gelo-a',  nome: 'Abacaxi',    preco_adicional: 0, disponivel: true },
+      { id: 'a-bev8-n', nome: 'Natural',    preco_adicional: 0, disponivel: true },
+      { id: 'a-bev8-m', nome: 'Morango',    preco_adicional: 0, disponivel: true },
+      { id: 'a-bev8-l', nome: 'Limão',      preco_adicional: 0, disponivel: true },
+      { id: 'a-bev8-a', nome: 'Abacaxi',    preco_adicional: 0, disponivel: true },
     ],
   }],
 };
