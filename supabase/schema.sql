@@ -123,6 +123,55 @@ create policy "delete autenticado"
   using (bucket_id = 'imagens');
 
 -- ============================================================
+-- TABELA: grupos_adicionais
+-- Agrupa opções de personalização por produto
+-- Ex: "Escolha o queijo", "Extras opcionais"
+-- ============================================================
+create table if not exists grupos_adicionais (
+  id          uuid primary key default uuid_generate_v4(),
+  produto_id  uuid not null references produtos(id) on delete cascade,
+  nome        text not null,
+  obrigatorio boolean not null default false,
+  min_sel     int  not null default 0,
+  max_sel     int  not null default 1,
+  ordem       int  not null default 0,
+  ativo       boolean not null default true
+);
+create index if not exists idx_grupos_produto on grupos_adicionais(produto_id);
+
+-- ============================================================
+-- TABELA: adicionais
+-- Opções individuais dentro de cada grupo
+-- Ex: "Catupiry", "Cheddar", "Bacon extra"
+-- ============================================================
+create table if not exists adicionais (
+  id               uuid primary key default uuid_generate_v4(),
+  grupo_id         uuid not null references grupos_adicionais(id) on delete cascade,
+  nome             text not null,
+  preco_adicional  numeric(10,2) not null default 0,
+  disponivel       boolean not null default true,
+  ordem            int  not null default 0
+);
+create index if not exists idx_adicionais_grupo on adicionais(grupo_id);
+
+-- RLS — leitura pública, escrita só para admins
+alter table grupos_adicionais enable row level security;
+alter table adicionais        enable row level security;
+
+create policy "leitura publica grupos_adicionais"
+  on grupos_adicionais for select using (true);
+create policy "leitura publica adicionais"
+  on adicionais for select using (true);
+create policy "escrita autenticada grupos_adicionais"
+  on grupos_adicionais for all
+  using (auth.role() = 'authenticated')
+  with check (auth.role() = 'authenticated');
+create policy "escrita autenticada adicionais"
+  on adicionais for all
+  using (auth.role() = 'authenticated')
+  with check (auth.role() = 'authenticated');
+
+-- ============================================================
 -- DADOS DE EXEMPLO (remover em produção se preferir)
 -- ============================================================
 insert into categorias (nome, ordem) values

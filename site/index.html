@@ -284,6 +284,46 @@
   </article>
 </div>
 
+<!-- ============ MODAL CUSTOMIZAÇÃO ============ -->
+<div id="modal-customizacao" class="modal-custom" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-custom-backdrop" id="modal-custom-backdrop"></div>
+  <article class="modal-custom-sheet" id="modal-custom-sheet">
+    <div class="modal-sheet-handle" id="modal-custom-handle" aria-hidden="true"></div>
+    <button class="modal-custom-fechar" id="modal-custom-fechar" type="button" aria-label="Fechar">×</button>
+    <div class="modal-custom-header">
+      <div class="modal-custom-img-wrap">
+        <img id="modal-custom-img" alt="">
+      </div>
+      <div class="modal-custom-meta">
+        <div id="modal-custom-cat" class="categoria-tag"></div>
+        <h2 id="modal-custom-nome"></h2>
+        <div id="modal-custom-preco-base" class="modal-custom-preco-base"></div>
+      </div>
+    </div>
+    <div id="modal-custom-grupos" class="modal-custom-grupos"></div>
+    <div class="modal-custom-footer">
+      <div class="modal-custom-campo">
+        <label for="modal-custom-identif">
+          📌 Identificação
+          <span class="campo-opcional">(opcional — ex: "pro João")</span>
+        </label>
+        <input id="modal-custom-identif" type="text" placeholder="pro João, pra mim, mesa 2…" autocomplete="off" maxlength="40">
+      </div>
+      <div class="modal-custom-campo">
+        <label for="modal-custom-obs">
+          💬 Observação
+          <span class="campo-opcional">(opcional)</span>
+        </label>
+        <textarea id="modal-custom-obs" rows="2" placeholder="Sem cebola, bem frito…" maxlength="120"></textarea>
+      </div>
+      <button id="modal-custom-add" type="button">
+        <span>Adicionar ao pedido</span>
+        <span id="modal-custom-total">R$ 0,00</span>
+      </button>
+    </div>
+  </article>
+</div>
+
 <!-- ============ DRAWER CARRINHO ============ -->
 <aside id="drawer-carrinho" aria-label="Carrinho">
   <div class="drawer-header">
@@ -622,6 +662,53 @@
       }, 380);
     } else {
       conteudo.style.transform = '';
+    }
+  }
+
+  document.addEventListener('touchmove',   onMove, { passive: true });
+  document.addEventListener('touchend',    onEnd,  { passive: true });
+  document.addEventListener('touchcancel', onEnd,  { passive: true });
+})();
+
+/* ── Swipe-to-dismiss — Bottom sheet de customização ── */
+(function () {
+  var modal    = document.getElementById('modal-customizacao');
+  var sheet    = document.getElementById('modal-custom-sheet');
+  var handle   = document.getElementById('modal-custom-handle');
+  if (!modal || !sheet || !handle) return;
+
+  var startY = 0, lastY = 0, dragging = false;
+  var THRESHOLD = 90;
+
+  handle.addEventListener('touchstart', function (e) {
+    startY  = e.touches[0].clientY;
+    lastY   = startY;
+    dragging = true;
+    sheet.style.transition = 'none';
+  }, { passive: true });
+
+  function onMove(e) {
+    if (!dragging) return;
+    lastY = e.touches[0].clientY;
+    var diff = Math.max(0, lastY - startY);
+    sheet.style.transform = 'translateY(' + diff + 'px)';
+  }
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    sheet.style.transition = '';
+    var diff = lastY - startY;
+    if (diff > THRESHOLD) {
+      sheet.style.transform = 'translateY(100%)';
+      setTimeout(function () {
+        modal.classList.remove('visivel');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-aberto');
+        sheet.style.transform = '';
+      }, 400);
+    } else {
+      sheet.style.transform = '';
     }
   }
 
