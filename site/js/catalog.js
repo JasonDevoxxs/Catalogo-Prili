@@ -50,10 +50,10 @@ const DEMO_PRODUTOS = [
   { id:'cerv3', nome:'Brahma LT',      descricao:'Cerveja Brahma gelada 350ml',     preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/brahma-lt.png',      ordem:2, categorias:{nome:'Cervejas Latas'} },
   { id:'cerv4', nome:'Antarctica LT',  descricao:'Cerveja Antarctica gelada 350ml', preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/antarctica-lt.png',  ordem:3, categorias:{nome:'Cervejas Latas'} },
   { id:'cerv5', nome:'Spaten LT',      descricao:'Cerveja Spaten gelada 350ml',     preco:7.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/spaten-lt.png',      ordem:4, categorias:{nome:'Cervejas Latas'} },
-  { id:'cerv6', nome:'Heineken LT',    descricao:'Cerveja Heineken gelada 350ml',   preco:8.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-lt.png',    ordem:5, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv6', nome:'Heineken LT',    descricao:'Cerveja Heineken gelada 350ml',   preco:8.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-lt.jpg',    ordem:5, categorias:{nome:'Cervejas Latas'} },
 
   /* ── Cervejas Long Neck ── */
-  { id:'ln1', nome:'Heineken Long',     descricao:'Heineken Long Neck 330ml',      preco:9.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/heineken-long.png',     ordem:0, categorias:{nome:'Cervejas Long Neck'} },
+  { id:'ln1', nome:'Heineken Long',     descricao:'Heineken Long Neck 330ml',      preco:9.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/heineken-long.webp',     ordem:0, categorias:{nome:'Cervejas Long Neck'} },
   { id:'ln2', nome:'Corona Long',       descricao:'Corona Long Neck 330ml',        preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long.png',       ordem:1, categorias:{nome:'Cervejas Long Neck'} },
   { id:'ln3', nome:'Corona Long Zero',  descricao:'Corona Long Neck Zero 330ml',   preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long-zero.png',  ordem:2, categorias:{nome:'Cervejas Long Neck'} },
 
