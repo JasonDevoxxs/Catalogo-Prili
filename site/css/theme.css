@@ -59,6 +59,9 @@
   --t-med:    0.3s  cubic-bezier(0.4, 0, 0.2, 1);
   --t-slow:   0.5s  cubic-bezier(0.4, 0, 0.2, 1);
   --t-spring: 0.5s  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* #9 — altura do banner de manutenção (controlada via JS) */
+  --banner-h: 0px;
 }
 
 /* Tema claro — mesma identidade âmbar e vinho, com leitura mais leve. */

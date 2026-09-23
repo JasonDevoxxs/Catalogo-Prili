@@ -493,6 +493,23 @@
   iniciarCatalogo();
 </script>
 <script>
+/* ── #9 — Banner de manutenção: ajusta --banner-h para header e nav ── */
+(function () {
+  var banner = document.getElementById('banner-manutencao');
+  if (!banner) return;
+
+  function sync() {
+    var h = banner.classList.contains('hidden') ? '0px' : banner.offsetHeight + 'px';
+    document.documentElement.style.setProperty('--banner-h', h);
+  }
+
+  sync();
+  new MutationObserver(sync).observe(banner, { attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', sync, { passive: true });
+})();
+</script>
+
+<script>
 /* ── Swipe para fechar — Drawer do carrinho (#4) ── */
 (function () {
   var drawer  = document.getElementById('drawer-carrinho');

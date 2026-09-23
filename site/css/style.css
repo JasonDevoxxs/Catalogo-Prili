@@ -14,6 +14,7 @@ body {
   background: var(--cor-bg);
   color: var(--cor-texto);
   min-height: 100vh;
+  min-height: 100dvh; /* #8 — iOS Safari dynamic viewport */
   overflow-x: hidden;
 }
 
@@ -45,10 +46,11 @@ body {
 /* ---- HEADER ---- */
 #header {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: var(--banner-h, 0px); left: 0; right: 0; /* #9 — desce quando banner ativo */
   z-index: 100;
   padding: 1rem 0;
-  transition: background var(--t-med), backdrop-filter var(--t-med), padding var(--t-med), box-shadow var(--t-med);
+  transition: background var(--t-med), backdrop-filter var(--t-med),
+              padding var(--t-med), box-shadow var(--t-med), top var(--t-med);
 }
 #header.scrolled {
   background: var(--glass-bg);
@@ -215,6 +217,7 @@ html[data-theme="light"] #btn-tema .icone-lua { display: block; }
 /* ---- HERO ---- */
 #hero {
   min-height: 100vh;
+  min-height: 100dvh; /* #8 — iOS Safari dynamic viewport */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -586,7 +589,7 @@ html[data-theme="light"] .header-search, html[data-theme="light"] .hero-search {
 /* ---- CATEGORIAS NAV ---- */
 #categorias-nav {
   position: sticky;
-  top: 60px;
+  top: calc(60px + var(--banner-h, 0px)); /* #9 — compensa banner de manutenção */
   z-index: 50;
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
@@ -1735,6 +1738,14 @@ footer span { color: var(--cor-primaria); }
   .modal-produto-conteudo { grid-template-columns: 1fr; max-height: calc(100vh - 2.5rem); overflow-y: auto; }
   .modal-produto-imagem { min-height: 220px; max-height: 34vh; }
   .modal-produto-info { min-height: 280px; }
+
+  /* #7 — Hero compacto no mobile */
+  #hero { padding: 4.5rem 1.25rem 3rem; }
+  .hero-badge { margin-bottom: 1rem; font-size: .72rem; }
+  .hero-subtitle { font-size: .88rem; margin-bottom: 1.75rem; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat .num { font-size: 1.35rem; }
+  .hero-scroll { bottom: calc(1.25rem + 60px + env(safe-area-inset-bottom)); }
 
   /* Card proportion fix — square on mobile for better density */
   .produtos-grid:not(.layout-1) .produto-card .img-wrap { aspect-ratio: 1 / 1; }
