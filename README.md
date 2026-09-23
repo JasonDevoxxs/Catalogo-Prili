@@ -52,6 +52,7 @@ sem tocar no restante do código. Veja o passo a passo completo em
 - Carrinho de pedido que monta a mensagem e abre o WhatsApp da loja (liga/desliga por config).
 - Painel admin com login, CRUD de produtos (com upload de imagem) e categorias.
 - Configurações da loja editáveis pelo próprio cliente (nome, logo, cores, WhatsApp, horário).
+- Selo "Aberto/Fechado" calculado automaticamente em tempo real pelo horário configurado, com suporte a dias especiais (datas com horário diferente ou fechadas) cadastráveis pelo próprio cliente — veja [`docs/GUIA-PERSONALIZACAO.md`](docs/GUIA-PERSONALIZACAO.md#71-horário-automático-abertofechado-em-tempo-real).
 - Tema 100% via variáveis CSS — trocar a cara do site é trocar `theme.css`.
 - Modo manutenção (liga uma página "em breve" sem apagar dados).
 
