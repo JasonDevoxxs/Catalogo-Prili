@@ -84,6 +84,36 @@ No painel admin (`site/admin/`):
 
 ---
 
+## 7.1 Horário automático (Aberto/Fechado em tempo real)
+
+O selo "Aberto"/"Fechado" do site **não é manual** — ele é recalculado sozinho
+comparando a hora atual com o horário configurado, e se atualiza a cada 1
+minuto sem precisar recarregar a página.
+
+Em **Configurações → Horário automático**:
+
+- **Abre às / Fecha às** — horário padrão de funcionamento.
+- **Dias abertos** — marque os dias da semana em que a loja funciona nesse
+  horário padrão (o template já vem com terça a domingo, 17h–22h).
+- **Fechar loja manualmente agora** — use só em imprevistos/feriados: força o
+  selo para "Fechado" independente do horário configurado.
+
+Em **Configurações → Dias especiais**, os próprios donos podem cadastrar, a
+qualquer momento, datas com horário diferente do padrão:
+
+- Clique em **"+ Adicionar dia especial"**, escolha a data e o novo horário
+  de abertura/fechamento (ex: virada de ano funcionando até 01:00).
+- Ou marque **"Fechado o dia todo"** para uma data específica (feriado, recesso).
+- Dá pra adicionar quantos dias especiais quiser, e removê-los (✕) quando não
+  forem mais necessários.
+- Um dia especial cadastrado sempre tem prioridade sobre o horário padrão
+  daquele dia da semana.
+- Um expediente que atravessa a meia-noite (ex: abre 17h, fecha 01:00) é
+  calculado corretamente — a loja continua marcada como "Aberta" até o
+  horário de fechamento, mesmo já sendo o dia seguinte.
+
+---
+
 ## 8. Deploy
 
 O site é 100% estático — a pasta `site/` é o que vai ao ar.
