@@ -597,19 +597,19 @@ html[data-theme="light"] .header-search, html[data-theme="light"] .hero-search {
   border-bottom: 1px solid var(--glass-border);
   overflow-x: auto;
   scrollbar-width: none;
-  /* #10 — fade lateral padrão: ambos os lados */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-  mask-image:         linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  /* #10 — fade lateral padrão: ambos os lados (24px fixo, não % relativo) */
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 24px, black calc(100% - 24px), transparent 100%);
+  mask-image:         linear-gradient(to right, transparent 0px, black 24px, black calc(100% - 24px), transparent 100%);
 }
 #categorias-nav::-webkit-scrollbar { display: none; }
 /* #10 — estados dinâmicos via JS */
 #categorias-nav.at-start {
-  -webkit-mask-image: linear-gradient(to right, black 0%, black 96%, transparent 100%);
-  mask-image:         linear-gradient(to right, black 0%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 0px, black calc(100% - 24px), transparent 100%);
+  mask-image:         linear-gradient(to right, black 0px, black calc(100% - 24px), transparent 100%);
 }
 #categorias-nav.at-end {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 100%);
-  mask-image:         linear-gradient(to right, transparent 0%, black 4%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 24px, black 100%);
+  mask-image:         linear-gradient(to right, transparent 0px, black 24px, black 100%);
 }
 #categorias-nav.at-start.at-end {
   -webkit-mask-image: none;
@@ -622,6 +622,9 @@ html[data-theme="light"] .header-search, html[data-theme="light"] .hero-search {
   display: flex;
   gap: .5rem;
   white-space: nowrap;
+  /* garante que a lista possa ser maior que o container para rolar */
+  width: max-content;
+  min-width: 100%;
 }
 .cat-btn {
   border: 1px solid transparent;
@@ -637,6 +640,9 @@ html[data-theme="light"] .header-search, html[data-theme="light"] .hero-search {
   letter-spacing: .02em;
   position: relative;
   overflow: hidden;
+  /* impede o flexbox de comprimir os botões */
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .cat-btn::before {
   content: '';
