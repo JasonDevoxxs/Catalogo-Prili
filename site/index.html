@@ -15,6 +15,17 @@
 </head>
 <body>
 
+<!-- ============ SPLASH SCREEN ============ -->
+<div id="splash-screen" aria-hidden="true">
+  <div class="splash-logo-wrap">
+    <img class="splash-logo" src="assets/logo.jpg" alt="Tonynhos bar" onerror="this.style.display='none'">
+  </div>
+  <div class="splash-footer">
+    <span class="splash-nome">Tonynhos bar</span>
+    <span class="splash-sub">Adega &amp; Pastelaria</span>
+  </div>
+</div>
+
 <!-- Banner de manutenção -->
 <div id="banner-manutencao" class="hidden">
   🔧 Estamos em manutenção. Voltamos em breve!
@@ -172,6 +183,12 @@
         </button>
       </div>
     </div>
+    <!-- Strip de destaques — aparece ao filtrar/buscar -->
+    <div id="strip-destaques" class="strip-destaques hidden">
+      <div class="strip-destaques-titulo">✦ Em destaque</div>
+      <div id="strip-destaques-lista" class="strip-destaques-lista"></div>
+    </div>
+
     <div id="grid-produtos" class="produtos-grid layout-3"></div>
     <div id="sem-resultados" class="hidden">
       <div class="icon">🔍</div>
@@ -220,40 +237,104 @@
     <div class="checkout-resumo" id="checkout-resumo"></div>
 
     <form class="checkout-form" id="checkout-form" novalidate>
+
+      <!-- Dados obrigatórios -->
+      <div class="checkout-secao-titulo">Seus dados</div>
+
       <div class="checkout-campo">
-        <label for="co-nome">Nome completo *</label>
-        <input id="co-nome" type="text" placeholder="Ex: Maria Silva" autocomplete="name" required>
+        <label for="co-nome">Nome completo <span class="co-obrigatorio">*</span></label>
+        <input id="co-nome" type="text" placeholder="Ex: Maria Silva" autocomplete="name" required maxlength="60">
       </div>
       <div class="checkout-campo">
-        <label for="co-tel">WhatsApp / Telefone *</label>
-        <input id="co-tel" type="tel" placeholder="(19) 99999-9999" autocomplete="tel" required>
-      </div>
-      <div class="checkout-campo" id="campo-endereco" style="display:none">
-        <label for="co-end">Endereço de entrega *</label>
-        <input id="co-end" type="text" placeholder="Rua, número, bairro">
-      </div>
-      <div class="checkout-campo">
-        <label for="co-obs">Observações do pedido</label>
-        <textarea id="co-obs" rows="2" placeholder="Sem cebola, ponto da carne…"></textarea>
+        <label for="co-tel">
+          WhatsApp para notificação <span class="co-obrigatorio">*</span>
+          <span class="co-dica">Você receberá atualizações do pedido aqui</span>
+        </label>
+        <input id="co-tel" type="tel" placeholder="(19) 99999-9999" autocomplete="tel" required maxlength="20">
       </div>
 
-      <div class="checkout-opcoes">
-        <div class="checkout-campo-sm">
-          <label for="co-recebimento">Recebimento</label>
-          <select id="co-recebimento">
-            <option value="retirada">Retirar na loja</option>
-            <option value="entrega">Quero entrega</option>
-          </select>
+      <!-- Recebimento -->
+      <div class="checkout-secao-titulo">Entrega</div>
+
+      <div class="checkout-campo">
+        <label for="co-recebimento">Como deseja receber? <span class="co-obrigatorio">*</span></label>
+        <div class="co-radio-group" id="co-recebimento-group">
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-recebimento" id="co-recebimento" value="retirada" checked>
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label">
+              <strong>Retirar na loja</strong>
+              <small>Venha buscar quando estiver pronto</small>
+            </span>
+          </label>
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-recebimento" value="mesa">
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label">
+              <strong>Consumir aqui (mesa)</strong>
+              <small>Informe o número da sua mesa</small>
+            </span>
+          </label>
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-recebimento" value="entrega">
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label">
+              <strong>Entrega no endereço</strong>
+              <small>Consulte disponibilidade com a loja</small>
+            </span>
+          </label>
         </div>
-        <div class="checkout-campo-sm">
-          <label for="co-pagamento">Pagamento</label>
-          <select id="co-pagamento">
-            <option value="combinar">Combinar com a loja</option>
-            <option value="pix">Pix</option>
-            <option value="cartao">Cartão</option>
-            <option value="dinheiro">Dinheiro</option>
-          </select>
+      </div>
+
+      <div class="checkout-campo" id="campo-mesa" style="display:none">
+        <label for="co-mesa">Número da mesa <span class="co-obrigatorio">*</span></label>
+        <input id="co-mesa" type="text" placeholder="Ex: Mesa 4" autocomplete="off" maxlength="20">
+      </div>
+      <div class="checkout-campo" id="campo-endereco" style="display:none">
+        <label for="co-end">Endereço completo <span class="co-obrigatorio">*</span></label>
+        <input id="co-end" type="text" placeholder="Rua, número, bairro, complemento" autocomplete="street-address" maxlength="120">
+      </div>
+
+      <!-- Pagamento -->
+      <div class="checkout-secao-titulo">Pagamento</div>
+
+      <div class="checkout-campo">
+        <label for="co-pagamento">Forma de pagamento <span class="co-obrigatorio">*</span></label>
+        <div class="co-radio-group" id="co-pagamento-group">
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-pagamento" id="co-pagamento" value="pix" checked>
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label"><strong>Pix</strong></span>
+          </label>
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-pagamento" value="cartao">
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label"><strong>Cartão</strong></span>
+          </label>
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-pagamento" value="dinheiro">
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label"><strong>Dinheiro</strong></span>
+          </label>
+          <label class="co-radio-opcao">
+            <input type="radio" name="co-pagamento" value="combinar">
+            <span class="co-radio-check"></span>
+            <span class="co-radio-label"><strong>Combinar com a loja</strong></span>
+          </label>
         </div>
+      </div>
+
+      <div class="checkout-campo" id="campo-troco" style="display:none">
+        <label for="co-troco">Troco para quanto? <span class="co-dica">(opcional)</span></label>
+        <input id="co-troco" type="text" placeholder="Ex: R$ 50,00" maxlength="20">
+      </div>
+
+      <!-- Observações -->
+      <div class="checkout-campo">
+        <label for="co-obs">
+          Observações gerais <span class="co-dica">(opcional)</span>
+        </label>
+        <textarea id="co-obs" rows="2" placeholder="Algo mais que a loja precisa saber…" maxlength="200"></textarea>
       </div>
 
       <button type="submit" class="checkout-submit">
@@ -282,6 +363,16 @@
       </div>
     </div>
   </article>
+</div>
+
+<!-- ============ UPSELL SHEET ============ -->
+<div id="upsell-sheet" class="upsell-sheet" aria-hidden="true" aria-live="polite">
+  <div class="upsell-progress"><div id="upsell-bar" class="upsell-bar"></div></div>
+  <div class="upsell-header">
+    <span class="upsell-titulo">🔥 Que tal completar o pedido?</span>
+    <button id="upsell-fechar" class="upsell-fechar" aria-label="Fechar sugestão">×</button>
+  </div>
+  <div id="upsell-lista" class="upsell-lista"></div>
 </div>
 
 <!-- ============ MODAL CUSTOMIZAÇÃO ============ -->
@@ -530,7 +621,17 @@
   iniciarTema();
   iniciarContatos();
   iniciarCarrinho();
-  iniciarCatalogo();
+
+  /* Aguarda catálogo + tempo mínimo de exibição do splash */
+  Promise.all([
+    iniciarCatalogo(),
+    new Promise(r => setTimeout(r, 1800))
+  ]).then(() => {
+    const splash = document.getElementById('splash-screen');
+    if (!splash) return;
+    splash.classList.add('splash-saindo');
+    setTimeout(() => splash.remove(), 700);
+  });
 </script>
 <script>
 /* ── #10 — Fade lateral dinâmico no scroll de categorias ── */

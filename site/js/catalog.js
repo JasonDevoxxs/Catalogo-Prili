@@ -43,6 +43,55 @@ const DEMO_PRODUTOS = [
 
   /* ── Pastéis Doces ── */
   { id:'d1', nome:'Nutella', descricao:'O clássico que todo mundo ama!', preco:20.00, destaque:true, ativo:true, disponivel:true, categoria_id:'c4', imagem_url:'assets/produtos/nutella.png', ordem:0, categorias:{nome:'Pastéis Doces'} },
+
+  /* ── Cervejas Latas ── */
+  { id:'cerv1', nome:'Original LT',    descricao:'Cerveja Original gelada 350ml',   preco:6.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/original-lt.png',    ordem:0, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv2', nome:'Skol LT',        descricao:'Cerveja Skol gelada 350ml',       preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/skol-lt.png',        ordem:1, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv3', nome:'Brahma LT',      descricao:'Cerveja Brahma gelada 350ml',     preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/brahma-lt.png',      ordem:2, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv4', nome:'Antarctica LT',  descricao:'Cerveja Antarctica gelada 350ml', preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/antarctica-lt.png',  ordem:3, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv5', nome:'Spaten LT',      descricao:'Cerveja Spaten gelada 350ml',     preco:7.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/spaten-lt.png',      ordem:4, categorias:{nome:'Cervejas Latas'} },
+  { id:'cerv6', nome:'Heineken LT',    descricao:'Cerveja Heineken gelada 350ml',   preco:8.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b1', imagem_url:'assets/bebidas/heineken-lt.png',    ordem:5, categorias:{nome:'Cervejas Latas'} },
+
+  /* ── Cervejas Long Neck ── */
+  { id:'ln1', nome:'Heineken Long',     descricao:'Heineken Long Neck 330ml',      preco:9.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/heineken-long.png',     ordem:0, categorias:{nome:'Cervejas Long Neck'} },
+  { id:'ln2', nome:'Corona Long',       descricao:'Corona Long Neck 330ml',        preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long.png',       ordem:1, categorias:{nome:'Cervejas Long Neck'} },
+  { id:'ln3', nome:'Corona Long Zero',  descricao:'Corona Long Neck Zero 330ml',   preco:9.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b2', imagem_url:'assets/bebidas/corona-long-zero.png',  ordem:2, categorias:{nome:'Cervejas Long Neck'} },
+
+  /* ── Refrigerantes ── */
+  { id:'ref1', nome:'Coca Cola Lata',    descricao:'Coca Cola gelada 350ml',         preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/coca-cola.png',    ordem:0, categorias:{nome:'Refrigerantes'} },
+  { id:'ref2', nome:'Fanta Laranja/Uva', descricao:'Fanta gelada 350ml — escolha o sabor', preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/fanta.png',         ordem:1, categorias:{nome:'Refrigerantes'} },
+  { id:'ref3', nome:'Sprite',            descricao:'Sprite gelada 350ml',            preco:5.50, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/sprite.png',       ordem:2, categorias:{nome:'Refrigerantes'} },
+  { id:'ref4', nome:'Caçulinha',         descricao:'Refrigerante Caçulinha gelado',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b3', imagem_url:'assets/bebidas/caculinha.png',    ordem:3, categorias:{nome:'Refrigerantes'} },
+
+  /* ── Sucos & Isotônicos ── */
+  { id:'suc1', nome:'Gatorade',      descricao:'Isotônico Gatorade gelado 500ml',   preco:8.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/gatorade.png',   ordem:0, categorias:{nome:'Sucos & Isotônicos'} },
+  { id:'suc2', nome:'Del Valle Lata', descricao:'Suco Del Valle gelado 290ml',      preco:8.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/delvalle.png',   ordem:1, categorias:{nome:'Sucos & Isotônicos'} },
+  { id:'suc3', nome:'Bio Leve',      descricao:'Suco Bio Leve natural gelado',      preco:4.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/bio-leve.png',   ordem:2, categorias:{nome:'Sucos & Isotônicos'} },
+
+  /* ── Energéticos ── */
+  { id:'en1', nome:'Monster',         descricao:'Energético Monster 473ml',       preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/monster.png',        ordem:0, categorias:{nome:'Energéticos'} },
+  { id:'en2', nome:'Red Bull',        descricao:'Energético Red Bull 250ml',      preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/redbull.png',        ordem:1, categorias:{nome:'Energéticos'} },
+  { id:'en3', nome:'Bally 2 Litros',  descricao:'Energético Bally 2L',           preco:18.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/bally-2l.png',       ordem:2, categorias:{nome:'Energéticos'} },
+  { id:'en4', nome:'Mansão Maromba',  descricao:'Energético Mansão Maromba',     preco:20.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/mansao-maromba.png', ordem:3, categorias:{nome:'Energéticos'} },
+
+  /* ── Copos Gin ── */
+  { id:'gin1', nome:'Döber Gin',      descricao:'Döber + Gelo de Coco + Bally',             preco:12.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-dober.png',      ordem:0, categorias:{nome:'Copos Gin'} },
+  { id:'gin2', nome:'Gordons Gin',    descricao:'Gordons + Gelo de Coco + Bally',           preco:20.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-gordons.png',    ordem:1, categorias:{nome:'Copos Gin'} },
+  { id:'gin3', nome:'Rocks Gin',      descricao:'Rocks + Gelo de Coco + Bally',             preco:15.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-rocks.png',      ordem:2, categorias:{nome:'Copos Gin'} },
+  { id:'gin4', nome:'Beefeater Gin',  descricao:'Beefeater + Gelo de Coco + Red Bull',      preco:35.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-beefeater.png',  ordem:3, categorias:{nome:'Copos Gin'} },
+  { id:'gin5', nome:'Tanqueray Gin',  descricao:'Tanqueray + Gelo de Coco + Red Bull',      preco:45.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/gin-tanqueray.png',  ordem:4, categorias:{nome:'Copos Gin'} },
+
+  /* ── Copos Whisky ── */
+  { id:'whi1', nome:'Red Label',     descricao:'Johnnie Walker Red Label + Gelo de Coco + Red Bull',  preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-redlabel.png',     ordem:0, categorias:{nome:'Copos Whisky'} },
+  { id:'whi2', nome:'Ballantines',   descricao:'Ballantines + Gelo de Coco + Red Bull',               preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-ballantines.png',   ordem:1, categorias:{nome:'Copos Whisky'} },
+  { id:'whi3', nome:'Buchanas',      descricao:'Buchanas + Gelo de Coco + Red Bull',                  preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-buchanas.png',      ordem:2, categorias:{nome:'Copos Whisky'} },
+  { id:'whi4', nome:'Chivas',        descricao:'Chivas Regal + Gelo de Coco + Red Bull',             preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-chivas.png',        ordem:3, categorias:{nome:'Copos Whisky'} },
+  { id:'whi5', nome:'Old Par',       descricao:'Old Par + Gelo de Coco + Red Bull',                  preco:45.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-oldpar.png',        ordem:4, categorias:{nome:'Copos Whisky'} },
+  { id:'whi6', nome:'Black Label',   descricao:'Johnnie Walker Black Label + Gelo de Coco + Red Bull', preco:45.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/whi-blacklabel.png',   ordem:5, categorias:{nome:'Copos Whisky'} },
+
+  /* ── Extras ── */
+  { id:'ext1', nome:'Gelo de Coco',  descricao:'Gelo de Coco — escolha o sabor',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b8', imagem_url:'assets/bebidas/gelo-coco.png', ordem:0, categorias:{nome:'Extras'} },
+  { id:'ext2', nome:'Água S/ Gás',   descricao:'Água mineral sem gás 500ml',       preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b8', imagem_url:'assets/bebidas/agua.png',      ordem:1, categorias:{nome:'Extras'} },
 ];
 
 const DEMO_CATEGORIAS = [
@@ -50,6 +99,14 @@ const DEMO_CATEGORIAS = [
   { id:'c2', nome:'Pastéis de Carne' },
   { id:'c3', nome:'Pastéis Especiais' },
   { id:'c4', nome:'Pastéis Doces' },
+  { id:'b1', nome:'Cervejas Latas' },
+  { id:'b2', nome:'Cervejas Long Neck' },
+  { id:'b3', nome:'Refrigerantes' },
+  { id:'b4', nome:'Sucos & Isotônicos' },
+  { id:'b5', nome:'Energéticos' },
+  { id:'b6', nome:'Copos Gin' },
+  { id:'b7', nome:'Copos Whisky' },
+  { id:'b8', nome:'Extras' },
 ];
 
 /* Adicionais de demonstração — produtos que têm opção de queijo e/ou extras */
@@ -79,12 +136,33 @@ function _grupoExtras(pid) {
 }
 
 const DEMO_ADICIONAIS = {
+  /* Pastéis */
   f1:  [_grupoQueijo('f1'),  _grupoExtras('f1')],
   f2:  [_grupoQueijo('f2'),  _grupoExtras('f2')],
   f8:  [_grupoQueijo('f8')],
   c2p: [_grupoQueijo('c2p')],
   c3p: [_grupoQueijo('c3p'), _grupoExtras('c3p')],
   c8p: [_grupoQueijo('c8p')],
+  /* Fanta — escolha o sabor */
+  ref2: [{
+    id: 'g-fanta', produto_id: 'ref2', nome: 'Escolha o sabor', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-fanta-l', nome: 'Laranja',  preco_adicional: 0, disponivel: true },
+      { id: 'a-fanta-u', nome: 'Uva',      preco_adicional: 0, disponivel: true },
+    ],
+  }],
+  /* Gelo de Coco — sabores */
+  ext1: [{
+    id: 'g-gelo', produto_id: 'ext1', nome: 'Escolha o sabor', obrigatorio: true,
+    min_sel: 1, max_sel: 1, ordem: 0,
+    adicionais: [
+      { id: 'a-gelo-n',  nome: 'Natural',    preco_adicional: 0, disponivel: true },
+      { id: 'a-gelo-m',  nome: 'Morango',    preco_adicional: 0, disponivel: true },
+      { id: 'a-gelo-l',  nome: 'Limão',      preco_adicional: 0, disponivel: true },
+      { id: 'a-gelo-a',  nome: 'Abacaxi',    preco_adicional: 0, disponivel: true },
+    ],
+  }],
 };
 
 const isDemo = CONFIG.supabaseUrl.includes('SEU-PROJETO');
@@ -241,17 +319,66 @@ function renderProdutos() {
   const semResultados = document.getElementById('sem-resultados');
   const titulo = document.getElementById('titulo-cardapio');
   if (!grid) return;
+
   const filtrados = todosProdutos.filter(p => {
-    const matchCat = categoriaAtiva === 'todos' || (categoriaAtiva === 'favoritos' ? favoritos.has(p.id) : p.categoria_id === categoriaAtiva);
+    const matchCat = categoriaAtiva === 'todos'
+      ? true
+      : (categoriaAtiva === 'favoritos' ? favoritos.has(p.id) : p.categoria_id === categoriaAtiva);
     const texto = `${p.nome} ${p.descricao || ''} ${p.categorias?.nome || ''}`.toLowerCase();
     return matchCat && (!termoBusca || texto.includes(termoBusca));
   });
+
   if (titulo) titulo.firstChild.textContent = categoriaAtiva === 'favoritos' ? 'Favoritos' : 'Cardápio';
+
+  /* Strip de destaques — só aparece ao filtrar ou buscar (evita duplicar com #secao-destaques) */
+  const estaFiltrando = categoriaAtiva !== 'todos' || !!termoBusca;
+  const stripEl    = document.getElementById('strip-destaques');
+  const stripLista = document.getElementById('strip-destaques-lista');
+  if (stripEl && stripLista) {
+    const destaquesVisiveis = estaFiltrando ? filtrados.filter(p => p.destaque) : [];
+    if (destaquesVisiveis.length) {
+      stripLista.innerHTML = '';
+      destaquesVisiveis.forEach(p => stripLista.appendChild(criarCardStrip(p)));
+      stripEl.classList.remove('hidden');
+    } else {
+      stripEl.classList.add('hidden');
+    }
+  }
+
   grid.innerHTML = '';
   if (!filtrados.length) { semResultados?.classList.remove('hidden'); return; }
   semResultados?.classList.add('hidden');
   filtrados.forEach(p => grid.appendChild(criarCard(p)));
   initScrollReveal();
+}
+
+function criarCardStrip(produto) {
+  const disponivel = produto.disponivel !== false;
+  const card = document.createElement('div');
+  card.className = 'strip-destaque-card';
+  card.innerHTML = `
+    <img class="strip-destaque-img" src="${escapar(produto.imagem_url || imagemPadrao())}"
+         alt="${escapar(produto.nome)}" loading="lazy" onerror="this.src='${imagemPadrao()}'">
+    <div class="strip-destaque-info">
+      <span class="strip-destaque-nome">${escapar(produto.nome)}</span>
+      ${CONFIG.mostrarPrecos ? `<span class="strip-destaque-preco">R$ ${Number(produto.preco).toFixed(2).replace('.', ',')}</span>` : ''}
+    </div>
+    <button class="strip-destaque-add" ${!disponivel || !CONFIG.carrinhoAtivo ? 'disabled' : ''}>
+      ${disponivel ? '+ Adicionar' : 'Indisponível'}
+    </button>`;
+
+  if (CONFIG.detalhesProdutoAtivos) {
+    card.addEventListener('click', ev => { if (!ev.target.closest('button')) abrirDetalhes(produto); });
+  }
+  if (CONFIG.carrinhoAtivo && disponivel) {
+    card.querySelector('.strip-destaque-add').addEventListener('click', ev => {
+      ev.stopPropagation();
+      const grupos = adicionaisPorProduto.get(produto.id) || [];
+      if (grupos.length) { abrirCustomizacao(produto); }
+      else { adicionarAoCarrinho(produto); mostrarUpsell(produto); }
+    });
+  }
+  return card;
 }
 
 /* ---- Card de produto ---- */
@@ -289,6 +416,7 @@ function criarCard(produto) {
         abrirCustomizacao(produto);
       } else {
         adicionarAoCarrinho(produto);
+        mostrarUpsell(produto);
       }
     });
   }
@@ -507,14 +635,90 @@ function confirmarCustomizacao() {
     qtd: 1,
   };
 
+  const produtoOriginal = _customProduto;
   adicionarAoCarrinho(itemCustomizado);
   fecharCustomizacao();
+  setTimeout(() => mostrarUpsell(produtoOriginal), 400);
+}
+
+/* ---- Upsell ---- */
+const UPSELL_CHAVE = 'catalogo-upsell-sessao';
+let _upsellTimer = null;
+
+function mostrarUpsell(produtoAdicionado) {
+  if (sessionStorage.getItem(UPSELL_CHAVE)) return;
+  if (!todosProdutos.length) return;
+
+  /* Produtos de categoria diferente da adicionada */
+  const sugestoes = todosProdutos.filter(p =>
+    p.id !== produtoAdicionado.id &&
+    p.categoria_id !== produtoAdicionado.categoria_id &&
+    p.disponivel !== false && p.ativo !== false
+  );
+  if (!sugestoes.length) return;
+
+  /* Embaralha e pega até 3 */
+  const embaralhado = sugestoes.sort(() => Math.random() - .5).slice(0, 3);
+
+  const sheet  = document.getElementById('upsell-sheet');
+  const lista  = document.getElementById('upsell-lista');
+  const bar    = document.getElementById('upsell-bar');
+  if (!sheet || !lista || !bar) return;
+
+  /* Renderiza itens */
+  lista.innerHTML = '';
+  const semImg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect fill='%231a1612' width='60' height='60'/%3E%3C/svg%3E`;
+  embaralhado.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'upsell-item';
+    item.innerHTML = `
+      <img class="upsell-item-img" src="${escapar(p.imagem_url || semImg)}" alt="${escapar(p.nome)}"
+           onerror="this.src='${semImg}'">
+      <div class="upsell-item-info">
+        <span class="upsell-item-nome">${escapar(p.nome)}</span>
+        ${CONFIG.mostrarPrecos ? `<span class="upsell-item-preco">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</span>` : ''}
+      </div>
+      <button class="upsell-item-add" aria-label="Adicionar ${escapar(p.nome)}">+</button>`;
+    item.querySelector('.upsell-item-add').addEventListener('click', () => {
+      const grupos = adicionaisPorProduto.get(p.id) || [];
+      fecharUpsell();
+      if (grupos.length) {
+        setTimeout(() => abrirCustomizacao(p), 200);
+      } else {
+        adicionarAoCarrinho(p);
+      }
+    });
+    lista.appendChild(item);
+  });
+
+  /* Abre o sheet */
+  sessionStorage.setItem(UPSELL_CHAVE, '1');
+  sheet.classList.add('visivel');
+  sheet.setAttribute('aria-hidden', 'false');
+
+  /* Reinicia progress bar */
+  bar.classList.remove('contando');
+  void bar.offsetWidth;
+  bar.classList.add('contando');
+
+  /* Fecha sozinho em 6s */
+  clearTimeout(_upsellTimer);
+  _upsellTimer = setTimeout(fecharUpsell, 6000);
+}
+
+function fecharUpsell() {
+  clearTimeout(_upsellTimer);
+  const sheet = document.getElementById('upsell-sheet');
+  sheet?.classList.remove('visivel');
+  sheet?.setAttribute('aria-hidden', 'true');
 }
 
 /* ---- Configuração dos modais ---- */
 function configurarModais() {
   /* Modal de produto */
   document.querySelectorAll('[data-fechar-produto]').forEach(el => el.addEventListener('click', fecharDetalhes));
+  /* Upsell */
+  document.getElementById('upsell-fechar')?.addEventListener('click', fecharUpsell);
   /* Modal de customização */
   document.getElementById('modal-custom-fechar')?.addEventListener('click', fecharCustomizacao);
   document.getElementById('modal-custom-backdrop')?.addEventListener('click', fecharCustomizacao);

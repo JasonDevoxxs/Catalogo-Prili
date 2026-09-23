@@ -74,7 +74,8 @@ export function iniciarCarrinho() {
   document.getElementById('btn-whatsapp')?.addEventListener('click', abrirCheckout);
   document.getElementById('checkout-fechar')?.addEventListener('click', fecharCheckout);
   document.getElementById('checkout-backdrop')?.addEventListener('click', fecharCheckout);
-  document.getElementById('co-recebimento')?.addEventListener('change', toggleEndereco);
+  document.getElementById('co-recebimento-group')?.addEventListener('change', toggleEntrega);
+  document.getElementById('co-pagamento-group')?.addEventListener('change', toggleTroco);
   document.getElementById('checkout-form')?.addEventListener('submit', confirmarPedido);
   renderCarrinho();
 }
@@ -209,8 +210,9 @@ function abrirCheckout() {
       </div>`;
   }
 
-  const obsDrawer = document.getElementById('obs-pedido')?.value;
-  if (obsDrawer) { const el = document.getElementById('co-obs'); if (el) el.value = obsDrawer; }
+  /* reseta campos dinâmicos */
+  toggleEntrega();
+  toggleTroco();
 
   const modal = document.getElementById('modal-checkout');
   if (modal) { modal.classList.add('visivel'); modal.setAttribute('aria-hidden','false'); }
@@ -224,56 +226,88 @@ function fecharCheckout() {
   document.body.classList.remove('modal-aberto');
 }
 
-function toggleEndereco() {
-  const rec   = document.getElementById('co-recebimento')?.value;
-  const campo = document.getElementById('campo-endereco');
-  const input = document.getElementById('co-end');
-  if (!campo) return;
-  const entrega = rec === 'entrega';
-  campo.style.display = entrega ? '' : 'none';
-  if (input) input.required = entrega;
+function toggleEntrega() {
+  const rec = document.querySelector('input[name="co-recebimento"]:checked')?.value || 'retirada';
+  const campoMesa = document.getElementById('campo-mesa');
+  const campoEnd  = document.getElementById('campo-endereco');
+  const inputMesa = document.getElementById('co-mesa');
+  const inputEnd  = document.getElementById('co-end');
+
+  const isMesa    = rec === 'mesa';
+  const isEntrega = rec === 'entrega';
+
+  if (campoMesa)  campoMesa.style.display  = isMesa    ? '' : 'none';
+  if (campoEnd)   campoEnd.style.display   = isEntrega ? '' : 'none';
+  if (inputMesa)  inputMesa.required       = isMesa;
+  if (inputEnd)   inputEnd.required        = isEntrega;
+}
+
+function toggleTroco() {
+  const pag = document.querySelector('input[name="co-pagamento"]:checked')?.value || '';
+  const campo = document.getElementById('campo-troco');
+  if (campo) campo.style.display = pag === 'dinheiro' ? '' : 'none';
 }
 
 function confirmarPedido(e) {
   e.preventDefault();
-  const nome     = document.getElementById('co-nome')?.value.trim();
-  const tel      = document.getElementById('co-tel')?.value.trim();
-  const end      = document.getElementById('co-end')?.value.trim();
-  const obs      = document.getElementById('co-obs')?.value.trim();
-  const recEl    = document.getElementById('co-recebimento');
-  const pagEl    = document.getElementById('co-pagamento');
-  const recLabel = recEl?.selectedOptions[0]?.text || '';
-  const pagLabel = pagEl?.selectedOptions[0]?.text || '';
-  const entrega  = recEl?.value === 'entrega';
 
-  if (!nome)            { document.getElementById('co-nome')?.focus(); mostrarToast('Informe seu nome.'); return; }
-  if (!tel)             { document.getElementById('co-tel')?.focus();  mostrarToast('Informe seu telefone.'); return; }
-  if (entrega && !end)  { document.getElementById('co-end')?.focus();  mostrarToast('Informe o endereço de entrega.'); return; }
+  const nome  = document.getElementById('co-nome')?.value.trim();
+  const tel   = document.getElementById('co-tel')?.value.trim();
+  const rec   = document.querySelector('input[name="co-recebimento"]:checked')?.value || 'retirada';
+  const pag   = document.querySelector('input[name="co-pagamento"]:checked')?.value   || 'combinar';
+  const mesa  = document.getElementById('co-mesa')?.value.trim();
+  const end   = document.getElementById('co-end')?.value.trim();
+  const troco = document.getElementById('co-troco')?.value.trim();
+  const obs   = document.getElementById('co-obs')?.value.trim();
+
+  const recLabels = { retirada: 'Retirar na loja', mesa: 'Consumir aqui (mesa)', entrega: 'Entrega no endereço' };
+  const pagLabels = { pix: 'Pix', cartao: 'Cartão', dinheiro: 'Dinheiro', combinar: 'Combinar com a loja' };
+
+  /* Validações */
+  if (!nome) { document.getElementById('co-nome')?.focus(); mostrarToast('Informe seu nome.'); return; }
+  if (!tel)  { document.getElementById('co-tel')?.focus();  mostrarToast('Informe seu WhatsApp.'); return; }
+  if (rec === 'mesa'    && !mesa) { document.getElementById('co-mesa')?.focus(); mostrarToast('Informe o número da mesa.'); return; }
+  if (rec === 'entrega' && !end)  { document.getElementById('co-end')?.focus();  mostrarToast('Informe o endereço de entrega.'); return; }
 
   const numeroPedido = gerarNumeroPedido();
   const total = itens.reduce((s, i) => s + i.preco_total * i.qtd, 0);
   const wpp   = window._whatsapp || CONFIG.whatsapp;
 
+  /* ---- Mensagem WhatsApp ---- */
   let msg = '';
-  msg += `🧾 *PEDIDO #${numeroPedido} — ${CONFIG.nomeLoja}*\n`;
+  msg += `🧾 *PEDIDO #${numeroPedido}*\n`;
+  msg += `📍 *${CONFIG.nomeLoja}*\n`;
   msg += `━━━━━━━━━━━━━━━━━━\n\n`;
-  msg += `👤 *Cliente:* ${nome}\n`;
-  msg += `📱 *Telefone:* ${tel}\n`;
-  msg += `🚗 *Recebimento:* ${recLabel}\n`;
-  if (entrega && end) msg += `📍 *Endereço:* ${end}\n`;
-  msg += `💳 *Pagamento:* ${pagLabel}\n\n`;
-  msg += `📋 *ITENS DO PEDIDO:*\n`;
+
+  msg += `👤 *CLIENTE*\n`;
+  msg += `   Nome: ${nome}\n`;
+  msg += `   WhatsApp: ${tel}\n\n`;
+
+  msg += `🚗 *ENTREGA*\n`;
+  msg += `   ${recLabels[rec] || rec}\n`;
+  if (rec === 'mesa'    && mesa) msg += `   Mesa: ${mesa}\n`;
+  if (rec === 'entrega' && end)  msg += `   Endereço: ${end}\n`;
+  msg += `\n`;
+
+  msg += `💳 *PAGAMENTO*\n`;
+  msg += `   ${pagLabels[pag] || pag}\n`;
+  if (pag === 'dinheiro' && troco) msg += `   Troco para: ${troco}\n`;
+  msg += `\n`;
+
+  msg += `━━━━━━━━━━━━━━━━━━\n`;
+  msg += `📋 *ITENS DO PEDIDO*\n\n`;
   itens.forEach(i => {
-    msg += `• ${i.nome}`;
+    msg += `• *${i.nome}*`;
     if (i.qtd > 1) msg += ` x${i.qtd}`;
-    msg += `  —  R$ ${(i.preco_total * i.qtd).toFixed(2).replace('.', ',')}\n`;
+    msg += `  →  R$ ${(i.preco_total * i.qtd).toFixed(2).replace('.', ',')}\n`;
     if (i.adicionais?.length) msg += `   ↳ ${i.adicionais.map(a => a.nome).join(', ')}\n`;
     if (i.identificacao)      msg += `   📌 ${i.identificacao}\n`;
     if (i.obs)                msg += `   💬 ${i.obs}\n`;
   });
-  msg += `\n💰 *TOTAL: R$ ${total.toFixed(2).replace('.',',')}*`;
-  if (obs) msg += `\n\n📝 *Observações gerais:* ${obs}`;
-  msg += `\n\n_Pedido realizado via catálogo digital_`;
+  msg += `\n━━━━━━━━━━━━━━━━━━\n`;
+  msg += `💰 *TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n`;
+  if (obs) msg += `\n📝 *Obs. gerais:* ${obs}\n`;
+  msg += `\n_Enviado pelo catálogo digital_`;
 
   fecharCheckout();
   window.open(`https://wa.me/${wpp}?text=${encodeURIComponent(msg)}`, '_blank');
