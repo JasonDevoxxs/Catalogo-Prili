@@ -1719,8 +1719,6 @@ footer span { color: var(--cor-primaria); }
 
 /* ---- RESPONSIVO ---- */
 
-/* #6 — Botão de busca no header mobile (hidden no desktop) */
-#btn-busca-header { display: none; }
 
 @media (max-width: 768px) {
   .header-inner { padding: 0 .8rem; gap: .5rem; }
@@ -1748,24 +1746,8 @@ footer span { color: var(--cor-primaria); }
   /* Body breathing room for bottom nav */
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
 
-  /* #6 — Botão busca visível no header, empurra botões para a direita */
-  #btn-busca-header {
-    display: grid;
-    place-items: center;
-    width: 2.55rem;
-    height: 2.55rem;
-    flex-shrink: 0;
-    margin-left: auto;
-    border: 1px solid var(--cor-borda);
-    border-radius: 50%;
-    background: rgba(255,255,255,.06);
-    color: var(--cor-primaria);
-    cursor: pointer;
-    transition: transform var(--t-spring), background var(--t-fast), border-color var(--t-fast);
-    -webkit-tap-highlight-color: transparent;
-  }
-  #btn-busca-header:hover  { transform: translateY(-2px); background: rgba(232,160,32,.1); border-color: var(--cor-primaria); }
-  #btn-busca-header:active { transform: scale(.92); }
+  /* Empurra carrinho+tema para a direita do header */
+  #btn-carrinho { margin-left: auto; }
 
   /* #5 — Touch targets mínimos 44×44px ---- */
 
