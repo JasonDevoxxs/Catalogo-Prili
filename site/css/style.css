@@ -1886,6 +1886,58 @@ footer span { color: var(--cor-primaria); }
   letter-spacing: .04em;
 }
 
+/* ---- BOTTOM SHEET — modal de produto no mobile ---- */
+.modal-sheet-handle {
+  display: none;
+  width: 36px; height: 4px;
+  border-radius: 2px;
+  background: var(--cor-borda);
+  margin: 14px auto 6px;
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+@media (max-width: 768px) {
+  .modal-sheet-handle { display: block; }
+
+  .modal-produto {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .modal-produto-conteudo {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 92dvh;
+    min-height: 60dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    grid-template-columns: 1fr;
+    /* override desktop slide */
+    transform: translateY(100%) !important;
+    transition: transform .42s cubic-bezier(0.32, 0.72, 0, 1) !important;
+    box-shadow: 0 -8px 60px rgba(0,0,0,.5), 0 -1px 0 var(--glass-border);
+  }
+  .modal-produto.visivel .modal-produto-conteudo {
+    transform: translateY(0) !important;
+  }
+  .modal-produto-imagem {
+    min-height: 180px;
+    max-height: 44vw;
+  }
+  .modal-produto-info {
+    min-height: unset;
+    padding: 1.1rem 1.25rem 1.75rem;
+  }
+  .modal-produto-info h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
+  /* fechar button reposicionado para não conflitar com o handle */
+  .modal-produto-fechar {
+    top: .5rem; right: .75rem;
+    background: var(--cor-surface-2);
+    border-color: var(--cor-borda-suave);
+  }
+}
+
 /* ---- REDUCED MOTION ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }

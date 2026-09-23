@@ -268,6 +268,7 @@
 <div id="modal-produto" class="modal-produto" role="dialog" aria-modal="true" aria-labelledby="modal-produto-nome" aria-hidden="true">
   <div class="modal-produto-backdrop" data-fechar-produto></div>
   <article class="modal-produto-conteudo">
+    <div class="modal-sheet-handle" aria-hidden="true"></div>
     <button class="modal-produto-fechar" type="button" aria-label="Fechar detalhes" data-fechar-produto>×</button>
     <div class="modal-produto-imagem"><img id="modal-produto-img" alt=""></div>
     <div class="modal-produto-info">
@@ -492,6 +493,103 @@
   iniciarCatalogo();
 </script>
 <script>
+/* ── Swipe para fechar — Drawer do carrinho (#4) ── */
+(function () {
+  var drawer  = document.getElementById('drawer-carrinho');
+  var ovl     = document.getElementById('overlay');
+  if (!drawer) return;
+
+  var startX = 0, lastX = 0, dragging = false;
+  var THRESHOLD = 80;
+
+  drawer.addEventListener('touchstart', function (e) {
+    startX  = e.touches[0].clientX;
+    lastX   = startX;
+    dragging = true;
+    drawer.style.transition = 'none';
+    if (ovl) ovl.style.transition = 'none';
+  }, { passive: true });
+
+  drawer.addEventListener('touchmove', function (e) {
+    if (!dragging) return;
+    lastX = e.touches[0].clientX;
+    var diff = Math.max(0, lastX - startX);
+    drawer.style.transform = 'translateX(' + diff + 'px)';
+    if (ovl) ovl.style.opacity = String(Math.max(0, 1 - diff / (window.innerWidth * 0.55)));
+  }, { passive: true });
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    drawer.style.transition = '';
+    if (ovl) ovl.style.transition = '';
+
+    var diff = lastX - startX;
+    if (diff > THRESHOLD) {
+      /* fecha */
+      drawer.style.transform = '';
+      drawer.classList.remove('aberto');
+      if (ovl) { ovl.style.opacity = ''; ovl.classList.remove('visivel'); }
+    } else {
+      /* volta */
+      drawer.style.transform = '';
+      if (ovl) ovl.style.opacity = '';
+    }
+  }
+
+  drawer.addEventListener('touchend',    onEnd, { passive: true });
+  drawer.addEventListener('touchcancel', onEnd, { passive: true });
+})();
+
+/* ── Swipe-to-dismiss — Bottom sheet do modal de produto (#3) ── */
+(function () {
+  var modal    = document.getElementById('modal-produto');
+  var conteudo = modal && modal.querySelector('.modal-produto-conteudo');
+  var handle   = modal && modal.querySelector('.modal-sheet-handle');
+  if (!modal || !conteudo || !handle) return;
+
+  var startY = 0, lastY = 0, dragging = false;
+  var THRESHOLD = 90;
+
+  handle.addEventListener('touchstart', function (e) {
+    startY  = e.touches[0].clientY;
+    lastY   = startY;
+    dragging = true;
+    conteudo.style.transition = 'none';
+  }, { passive: true });
+
+  function onMove(e) {
+    if (!dragging) return;
+    lastY = e.touches[0].clientY;
+    var diff = Math.max(0, lastY - startY);
+    conteudo.style.transform = 'translateY(' + diff + 'px)';
+  }
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    conteudo.style.transition = '';
+
+    var diff = lastY - startY;
+    if (diff > THRESHOLD) {
+      /* fecha — anima saída depois remove */
+      conteudo.style.transform = 'translateY(100%)';
+      setTimeout(function () {
+        modal.classList.remove('visivel');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-aberto');
+        conteudo.style.transform = '';
+      }, 380);
+    } else {
+      conteudo.style.transform = '';
+    }
+  }
+
+  document.addEventListener('touchmove',   onMove, { passive: true });
+  document.addEventListener('touchend',    onEnd,  { passive: true });
+  document.addEventListener('touchcancel', onEnd,  { passive: true });
+})();
+
 /* ── Bottom Nav + Search Overlay ── */
 (function () {
   var btnInicio  = document.getElementById('bnav-inicio');
