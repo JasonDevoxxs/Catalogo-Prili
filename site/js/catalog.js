@@ -2,6 +2,7 @@ import supabase from './supabaseClient.js';
 import CONFIG from './config.js';
 import { adicionarAoCarrinho } from './cart.js';
 import { apply3DTilt, initScrollReveal, animateCounter } from './animations.js';
+import { calcularStatusLoja } from './horario.js';
 
 const CHAVE_FAVORITOS = 'catalogo-favoritos';
 let todosProdutos = [];
@@ -55,6 +56,7 @@ export async function iniciarCatalogo() {
   await Promise.all([carregarCategorias(), carregarProdutos()]);
   configurarBusca();
   configurarModalProduto();
+  iniciarStatusLoja();
 }
 
 function carregarFavoritos() {
@@ -96,12 +98,34 @@ async function carregarConfiguracoes() {
   for (const [configKey, databaseKey] of Object.entries({ carrinhoAtivo:'carrinho_ativo', mostrarPrecos:'mostrar_precos', modoManutencao:'modo_manutencao', favoritosAtivos:'favoritos_ativos', detalhesProdutoAtivos:'detalhes_produto_ativos' })) {
     if (cfg[databaseKey] !== undefined) CONFIG[configKey] = cfg[databaseKey] === 'true';
   }
-  if (cfg.horario_aberto !== undefined) {
-    const aberto = cfg.horario_aberto === 'true';
-    const status = document.getElementById('store-status');
+  if (cfg.horario_abertura) CONFIG.horarioAbertura = cfg.horario_abertura;
+  if (cfg.horario_fechamento) CONFIG.horarioFechamento = cfg.horario_fechamento;
+  if (cfg.horario_dias_semana) CONFIG.horarioDiasSemana = cfg.horario_dias_semana.split(',').filter(Boolean).map(Number);
+  if (cfg.horario_fechado_manual !== undefined) CONFIG.horarioFechadoManual = cfg.horario_fechado_manual === 'true';
+  if (cfg.dias_especiais) {
+    try { CONFIG.diasEspeciais = JSON.parse(cfg.dias_especiais); } catch { /* mantém padrão */ }
+  }
+}
+
+function iniciarStatusLoja() {
+  const status = document.getElementById('store-status');
+  if (!status) return;
+
+  const atualizar = () => {
+    const { aberto } = calcularStatusLoja({
+      abertura: CONFIG.horarioAbertura,
+      fechamento: CONFIG.horarioFechamento,
+      diasSemana: CONFIG.horarioDiasSemana,
+      diasEspeciais: CONFIG.diasEspeciais,
+      fechadoManual: CONFIG.horarioFechadoManual,
+    });
     status.textContent = aberto ? 'Aberto' : 'Fechado';
     status.className = aberto ? 'aberto' : 'fechado';
-  }
+  };
+
+  atualizar();
+  setInterval(atualizar, 60_000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) atualizar(); });
 }
 
 async function carregarCategorias() {
