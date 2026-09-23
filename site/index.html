@@ -493,6 +493,29 @@
   iniciarCatalogo();
 </script>
 <script>
+/* ── #10 — Fade lateral dinâmico no scroll de categorias ── */
+(function () {
+  var nav = document.getElementById('categorias-nav');
+  if (!nav) return;
+
+  function update() {
+    var atStart = nav.scrollLeft <= 2;
+    var atEnd   = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 2;
+    nav.classList.toggle('at-start', atStart);
+    nav.classList.toggle('at-end',   atEnd);
+  }
+
+  update();
+  nav.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+
+  /* re-verifica quando categorias dinâmicas são adicionadas via JS */
+  var lista = nav.querySelector('.categorias-lista');
+  if (lista) new MutationObserver(update).observe(lista, { childList: true });
+})();
+</script>
+
+<script>
 /* ── #9 — Banner de manutenção: ajusta --banner-h para header e nav ── */
 (function () {
   var banner = document.getElementById('banner-manutencao');

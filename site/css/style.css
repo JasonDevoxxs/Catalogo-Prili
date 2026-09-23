@@ -597,8 +597,24 @@ html[data-theme="light"] .header-search, html[data-theme="light"] .hero-search {
   border-bottom: 1px solid var(--glass-border);
   overflow-x: auto;
   scrollbar-width: none;
+  /* #10 — fade lateral padrão: ambos os lados */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  mask-image:         linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
 }
 #categorias-nav::-webkit-scrollbar { display: none; }
+/* #10 — estados dinâmicos via JS */
+#categorias-nav.at-start {
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 96%, transparent 100%);
+  mask-image:         linear-gradient(to right, black 0%, black 96%, transparent 100%);
+}
+#categorias-nav.at-end {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 100%);
+  mask-image:         linear-gradient(to right, transparent 0%, black 4%, black 100%);
+}
+#categorias-nav.at-start.at-end {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
 .categorias-lista {
   max-width: 1280px;
   margin: 0 auto;
