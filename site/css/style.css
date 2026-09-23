@@ -1718,8 +1718,12 @@ footer span { color: var(--cor-primaria); }
 @media (max-width: 600px) { .footer-sep { display: none; } }
 
 /* ---- RESPONSIVO ---- */
+
+/* #6 — Botão de busca no header mobile (hidden no desktop) */
+#btn-busca-header { display: none; }
+
 @media (max-width: 768px) {
-  .header-inner { padding: 0 .8rem; gap: .55rem; }
+  .header-inner { padding: 0 .8rem; gap: .5rem; }
   .header-search, #store-status { display: none; }
   #store-name { font-size: 1rem; }
   .logo-wrap img { width: 34px; height: 34px; }
@@ -1743,6 +1747,62 @@ footer span { color: var(--cor-primaria); }
 
   /* Body breathing room for bottom nav */
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+
+  /* #6 — Botão busca visível no header, empurra botões para a direita */
+  #btn-busca-header {
+    display: grid;
+    place-items: center;
+    width: 2.55rem;
+    height: 2.55rem;
+    flex-shrink: 0;
+    margin-left: auto;
+    border: 1px solid var(--cor-borda);
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+    color: var(--cor-primaria);
+    cursor: pointer;
+    transition: transform var(--t-spring), background var(--t-fast), border-color var(--t-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+  #btn-busca-header:hover  { transform: translateY(-2px); background: rgba(232,160,32,.1); border-color: var(--cor-primaria); }
+  #btn-busca-header:active { transform: scale(.92); }
+
+  /* #5 — Touch targets mínimos 44×44px ---- */
+
+  /* Botões de quantidade no carrinho */
+  .controles { gap: .15rem; padding: .15rem .3rem; }
+  .controles button {
+    width: 34px; height: 34px;
+    position: relative;
+  }
+  .controles button::after {
+    content: ''; position: absolute; inset: -5px;
+  }
+
+  /* Botão favorito no card */
+  .btn-favorito { width: 2.75rem; height: 2.75rem; }
+
+  /* Categorias nav — toque mais fácil */
+  .cat-btn { padding: .6rem 1.15rem; font-size: .84rem; }
+
+  /* Seletor de layout */
+  .layout-btn { width: 2.75rem; height: 2.75rem; }
+
+  /* Fechar modal de produto */
+  .modal-produto-fechar { width: 2.75rem; height: 2.75rem; font-size: 1.5rem; }
+
+  /* Remover item do carrinho */
+  .btn-remover {
+    min-width: 44px; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    padding: .5rem;
+  }
+
+  /* Fechar drawer */
+  #btn-fechar-carrinho { width: 2.75rem; height: 2.75rem; }
+
+  /* Botão fechar overlay de busca */
+  #busca-overlay-fechar { padding: .65rem 1rem; min-height: 44px; }
 }
 @media (max-width: 420px) {
   .produtos-grid { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
