@@ -1817,7 +1817,7 @@ footer span { color: var(--cor-primaria); }
   #toast { bottom: calc(1.75rem + 60px + env(safe-area-inset-bottom)); }
 
   /* Body breathing room for bottom nav */
-  body { padding-bottom: calc(60px + 1.75rem + env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(52px + 1.75rem + env(safe-area-inset-bottom)); }
 
   /* Empurra carrinho+tema para a direita do header */
   #btn-carrinho { margin-left: auto; }
@@ -1871,15 +1871,16 @@ footer span { color: var(--cor-primaria); }
     display: flex;
     position: fixed;
     bottom: calc(1rem + env(safe-area-inset-bottom));
-    left: 1rem; right: 1rem;
+    left: 1.5rem; right: 1.5rem;
     z-index: 310;
-    height: 60px;
-    border-radius: 20px;
+    height: 52px;
+    border-radius: 26px;
     background: var(--glass-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--glass-border);
     box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25);
+    padding: 0 .35rem;
   }
   .bnav-btn {
     flex: 1;
@@ -1887,7 +1888,6 @@ footer span { color: var(--cor-primaria); }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
     background: none;
     border: none;
     color: var(--cor-texto-fraco);
@@ -1898,28 +1898,24 @@ footer span { color: var(--cor-primaria); }
     letter-spacing: .03em;
     transition: color var(--t-fast), transform var(--t-spring);
     position: relative;
-    padding: .45rem 0;
     min-height: 44px;
     -webkit-tap-highlight-color: transparent;
   }
   .bnav-btn svg { transition: transform var(--t-spring); flex-shrink: 0; }
   .bnav-btn:active { transform: scale(0.9); }
   .bnav-btn.ativo { color: var(--cor-primaria); }
-  .bnav-btn.ativo svg { transform: translateY(-2px) scale(1.1); }
-  .bnav-btn.ativo::after {
+  .bnav-btn.ativo::before {
     content: '';
     position: absolute;
-    bottom: .4rem; left: 50%;
-    transform: translateX(-50%);
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--cor-primaria);
-    box-shadow: 0 0 6px var(--cor-primaria);
+    inset: 6px 4px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cor-primaria) 18%, transparent);
   }
+  .bnav-btn.ativo svg { transform: scale(1.1); }
   .bnav-btn--carrinho { position: relative; }
   .bnav-badge {
     position: absolute;
-    top: .3rem;
+    top: .25rem;
     left: 50%; margin-left: 5px;
     background: var(--cor-primaria);
     color: #0d0a08;
