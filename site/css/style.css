@@ -2493,6 +2493,53 @@ footer span { color: var(--cor-primaria); }
 }
 .adicional-preco.incluso { color: var(--cor-texto-fraco); font-weight: 400; }
 
+/* opção com foto — container de imagem */
+.adicional-opcao.tem-foto { padding: .5rem .85rem; align-items: center; gap: .75rem; }
+.adicional-foto {
+  width: 52px; height: 52px; flex-shrink: 0;
+  border-radius: 10px; overflow: hidden;
+  background: var(--cor-surface-2);
+  border: 1px solid var(--cor-borda-suave);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.adicional-foto img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: opacity 200ms ease;
+}
+/* skeleton shimmer enquanto a imagem não carrega / quando é null */
+.adicional-foto::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.07) 40%,
+    rgba(255,255,255,.13) 50%,
+    rgba(255,255,255,.07) 60%,
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: skeletonSlide 1.6s infinite linear;
+  border-radius: inherit;
+}
+.adicional-foto img[src] ~ .adicional-foto::before,
+.adicional-foto:has(img[src]) { animation: none; }
+.adicional-foto:has(img[src])::before { display: none; }
+/* ícone de câmera quando sem foto */
+.adicional-foto.sem-foto::after,
+.adicional-foto:not(:has(img[src]))::after {
+  content: '📷';
+  font-size: 1.3rem; opacity: .25;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes skeletonSlide {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+.adicional-info { display: flex; flex-direction: column; gap: .15rem; flex: 1; min-width: 0; }
+.adicional-info .adicional-nome { font-size: .84rem; }
+.adicional-info .adicional-preco { font-size: .76rem; }
+
 /* footer: identificação, obs, botão */
 .modal-custom-footer {
   padding: 1rem 1.25rem 1.25rem; border-top: 1px solid var(--cor-borda-suave);

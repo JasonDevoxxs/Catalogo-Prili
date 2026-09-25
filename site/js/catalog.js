@@ -121,12 +121,12 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev1', produto_id: 'bev1', nome: 'Escolha a marca', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev1-skol',  nome: 'Skol 350ml',        preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev1-brah',  nome: 'Brahma 350ml',       preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev1-anta',  nome: 'Antarctica 350ml',   preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev1-orig',  nome: 'Original 350ml',     preco_adicional: 0.50, disponivel: true },
-      { id: 'a-bev1-spat',  nome: 'Spaten 350ml',       preco_adicional: 1.50, disponivel: true },
-      { id: 'a-bev1-hein',  nome: 'Heineken 350ml',     preco_adicional: 2.50, disponivel: true },
+      { id: 'a-bev1-skol',  nome: 'Skol 350ml',        preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/cerv-skol.png' },
+      { id: 'a-bev1-brah',  nome: 'Brahma 350ml',       preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/cerv-brahma.png' },
+      { id: 'a-bev1-anta',  nome: 'Antarctica 350ml',   preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/cerv-antarctica.png' },
+      { id: 'a-bev1-orig',  nome: 'Original 350ml',     preco_adicional: 0.50, disponivel: true, imagem: 'assets/opcoes/cerv-original.png' },
+      { id: 'a-bev1-spat',  nome: 'Spaten 350ml',       preco_adicional: 1.50, disponivel: true, imagem: 'assets/opcoes/cerv-spaten.png' },
+      { id: 'a-bev1-hein',  nome: 'Heineken 350ml',     preco_adicional: 2.50, disponivel: true, imagem: 'assets/opcoes/cerv-heineken.png' },
     ],
   }],
   /* Long Neck — escolha a marca (base R$9,00 — todas iguais) */
@@ -134,9 +134,9 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev2', produto_id: 'bev2', nome: 'Escolha a marca', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev2-hein', nome: 'Heineken 330ml',      preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev2-cor',  nome: 'Corona 330ml',        preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev2-corz', nome: 'Corona Zero 330ml',   preco_adicional: 0.00, disponivel: true },
+      { id: 'a-bev2-hein', nome: 'Heineken 330ml',      preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/ln-heineken.png' },
+      { id: 'a-bev2-cor',  nome: 'Corona 330ml',        preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/ln-corona.png' },
+      { id: 'a-bev2-corz', nome: 'Corona Zero 330ml',   preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/ln-corona-zero.png' },
     ],
   }],
   /* Refrigerante — escolha o sabor (base R$3,00 = Caçulinha) */
@@ -144,11 +144,11 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev3', produto_id: 'bev3', nome: 'Escolha o sabor', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev3-cacu', nome: 'Caçulinha',           preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev3-coca', nome: 'Coca Cola Lata',       preco_adicional: 2.50, disponivel: true },
-      { id: 'a-bev3-fanl', nome: 'Fanta Laranja',        preco_adicional: 2.50, disponivel: true },
-      { id: 'a-bev3-fanu', nome: 'Fanta Uva',            preco_adicional: 2.50, disponivel: true },
-      { id: 'a-bev3-spri', nome: 'Sprite',               preco_adicional: 2.50, disponivel: true },
+      { id: 'a-bev3-cacu', nome: 'Caçulinha',           preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/refri-cacu.png' },
+      { id: 'a-bev3-coca', nome: 'Coca Cola Lata',       preco_adicional: 2.50, disponivel: true, imagem: 'assets/opcoes/refri-coca.png' },
+      { id: 'a-bev3-fanl', nome: 'Fanta Laranja',        preco_adicional: 2.50, disponivel: true, imagem: 'assets/opcoes/refri-fanta-laranja.png' },
+      { id: 'a-bev3-fanu', nome: 'Fanta Uva',            preco_adicional: 2.50, disponivel: true, imagem: 'assets/opcoes/refri-fanta-uva.png' },
+      { id: 'a-bev3-spri', nome: 'Sprite',               preco_adicional: 2.50, disponivel: true, imagem: 'assets/opcoes/refri-sprite.png' },
     ],
   }],
   /* Suco / Isotônico — escolha o produto (base R$4,00 = Bio Leve) */
@@ -156,9 +156,9 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev4', produto_id: 'bev4', nome: 'Escolha o produto', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev4-bio',  nome: 'Bio Leve',            preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev4-gat',  nome: 'Gatorade 500ml',      preco_adicional: 4.00, disponivel: true },
-      { id: 'a-bev4-del',  nome: 'Del Valle Lata',      preco_adicional: 4.00, disponivel: true },
+      { id: 'a-bev4-bio',  nome: 'Bio Leve',            preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/suco-bioleve.png' },
+      { id: 'a-bev4-gat',  nome: 'Gatorade 500ml',      preco_adicional: 4.00, disponivel: true, imagem: 'assets/opcoes/suco-gatorade.png' },
+      { id: 'a-bev4-del',  nome: 'Del Valle Lata',      preco_adicional: 4.00, disponivel: true, imagem: 'assets/opcoes/suco-delvalle.png' },
     ],
   }],
   /* Energético — escolha o produto (base R$12,00 = Monster/Red Bull) */
@@ -166,10 +166,10 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev5', produto_id: 'bev5', nome: 'Escolha o energético', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev5-mon',  nome: 'Monster 473ml',       preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev5-red',  nome: 'Red Bull 250ml',      preco_adicional: 0.00, disponivel: true },
-      { id: 'a-bev5-bal',  nome: 'Bally 2 Litros',      preco_adicional: 6.00, disponivel: true },
-      { id: 'a-bev5-mar',  nome: 'Mansão Maromba',      preco_adicional: 8.00, disponivel: true },
+      { id: 'a-bev5-mon',  nome: 'Monster 473ml',       preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/energ-monster.png' },
+      { id: 'a-bev5-red',  nome: 'Red Bull 250ml',      preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/energ-redbull.png' },
+      { id: 'a-bev5-bal',  nome: 'Bally 2 Litros',      preco_adicional: 6.00, disponivel: true, imagem: 'assets/opcoes/energ-bally.png' },
+      { id: 'a-bev5-mar',  nome: 'Mansão Maromba',      preco_adicional: 8.00, disponivel: true, imagem: 'assets/opcoes/energ-maromba.png' },
     ],
   }],
   /* Copo Gin — escolha a marca (base R$12,00 = Döber) */
@@ -177,11 +177,11 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev6', produto_id: 'bev6', nome: 'Escolha o gin', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev6-dob',  nome: 'Döber + Gelo de Coco + Bally',          preco_adicional:  0.00, disponivel: true },
-      { id: 'a-bev6-roc',  nome: 'Rocks + Gelo de Coco + Bally',          preco_adicional:  3.00, disponivel: true },
-      { id: 'a-bev6-gor',  nome: 'Gordons + Gelo de Coco + Bally',        preco_adicional:  8.00, disponivel: true },
-      { id: 'a-bev6-bee',  nome: 'Beefeater + Gelo de Coco + Red Bull',   preco_adicional: 23.00, disponivel: true },
-      { id: 'a-bev6-tan',  nome: 'Tanqueray + Gelo de Coco + Red Bull',   preco_adicional: 33.00, disponivel: true },
+      { id: 'a-bev6-dob',  nome: 'Döber + Gelo de Coco + Bally',          preco_adicional:  0.00, disponivel: true, imagem: 'assets/opcoes/gin-dober.png' },
+      { id: 'a-bev6-roc',  nome: 'Rocks + Gelo de Coco + Bally',          preco_adicional:  3.00, disponivel: true, imagem: 'assets/opcoes/gin-rocks.png' },
+      { id: 'a-bev6-gor',  nome: 'Gordons + Gelo de Coco + Bally',        preco_adicional:  8.00, disponivel: true, imagem: 'assets/opcoes/gin-gordons.png' },
+      { id: 'a-bev6-bee',  nome: 'Beefeater + Gelo de Coco + Red Bull',   preco_adicional: 23.00, disponivel: true, imagem: 'assets/opcoes/gin-beefeater.png' },
+      { id: 'a-bev6-tan',  nome: 'Tanqueray + Gelo de Coco + Red Bull',   preco_adicional: 33.00, disponivel: true, imagem: 'assets/opcoes/gin-tanqueray.png' },
     ],
   }],
   /* Copo Whisky — escolha a marca (base R$35,00 = Red Label / Ballantines) */
@@ -189,12 +189,12 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev7', produto_id: 'bev7', nome: 'Escolha o whisky', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev7-rl',   nome: 'Red Label + Gelo de Coco + Red Bull',   preco_adicional:  0.00, disponivel: true },
-      { id: 'a-bev7-bal',  nome: 'Ballantines + Gelo de Coco + Red Bull', preco_adicional:  0.00, disponivel: true },
-      { id: 'a-bev7-buc',  nome: 'Buchanas + Gelo de Coco + Red Bull',    preco_adicional: 10.00, disponivel: true },
-      { id: 'a-bev7-chi',  nome: 'Chivas Regal + Gelo de Coco + Red Bull',preco_adicional: 10.00, disponivel: true },
-      { id: 'a-bev7-old',  nome: 'Old Par + Gelo de Coco + Red Bull',     preco_adicional: 10.00, disponivel: true },
-      { id: 'a-bev7-bl',   nome: 'Black Label + Gelo de Coco + Red Bull', preco_adicional: 10.00, disponivel: true },
+      { id: 'a-bev7-rl',   nome: 'Red Label + Gelo de Coco + Red Bull',   preco_adicional:  0.00, disponivel: true, imagem: 'assets/opcoes/whi-redlabel.png' },
+      { id: 'a-bev7-bal',  nome: 'Ballantines + Gelo de Coco + Red Bull', preco_adicional:  0.00, disponivel: true, imagem: 'assets/opcoes/whi-ballantines.png' },
+      { id: 'a-bev7-buc',  nome: 'Buchanas + Gelo de Coco + Red Bull',    preco_adicional: 10.00, disponivel: true, imagem: 'assets/opcoes/whi-buchanas.png' },
+      { id: 'a-bev7-chi',  nome: 'Chivas Regal + Gelo de Coco + Red Bull',preco_adicional: 10.00, disponivel: true, imagem: 'assets/opcoes/whi-chivas.png' },
+      { id: 'a-bev7-old',  nome: 'Old Par + Gelo de Coco + Red Bull',     preco_adicional: 10.00, disponivel: true, imagem: 'assets/opcoes/whi-oldpar.png' },
+      { id: 'a-bev7-bl',   nome: 'Black Label + Gelo de Coco + Red Bull', preco_adicional: 10.00, disponivel: true, imagem: 'assets/opcoes/whi-blacklabel.png' },
     ],
   }],
   /* Gelo de Coco — sabores */
@@ -572,14 +572,17 @@ function abrirCustomizacao(produto) {
       </div>
       <div class="grupo-opcoes">
         ${grupo.adicionais.map(a => `
-          <label class="adicional-opcao">
+          <label class="adicional-opcao${a.imagem !== undefined ? ' tem-foto' : ''}">
             <input type="${tipoInput}" name="grupo-${escapar(grupo.id)}" value="${escapar(a.id)}"
                    data-nome="${escapar(a.nome)}" data-preco="${a.preco_adicional}"
                    class="adicional-input" ${!a.disponivel ? 'disabled' : ''}>
+            ${a.imagem !== undefined ? `<span class="adicional-foto">${a.imagem ? `<img src="${a.imagem}" alt="${escapar(a.nome)}" loading="lazy" onerror="this.parentElement.classList.add('sem-foto')">` : ''}</span>` : ''}
             <span class="adicional-check"></span>
-            <span class="adicional-nome">${escapar(a.nome)}</span>
-            <span class="adicional-preco ${a.preco_adicional === 0 ? 'incluso' : ''}">
-              ${a.preco_adicional > 0 ? `+R$ ${a.preco_adicional.toFixed(2).replace('.', ',')}` : 'incluso'}
+            <span class="adicional-info">
+              <span class="adicional-nome">${escapar(a.nome)}</span>
+              <span class="adicional-preco ${a.preco_adicional === 0 ? 'incluso' : ''}">
+                ${a.preco_adicional > 0 ? `+R$ ${a.preco_adicional.toFixed(2).replace('.', ',')}` : 'incluso'}
+              </span>
             </span>
           </label>`).join('')}
       </div>`;
