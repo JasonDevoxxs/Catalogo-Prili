@@ -58,10 +58,10 @@ const DEMO_PRODUTOS = [
   { id:'bev5', nome:'Energético',     descricao:'Gelado — escolha o produto',       preco:12.00, destaque:true,  ativo:true, disponivel:true, categoria_id:'b4', imagem_url:'assets/bebidas/monster.png',      ordem:0, categorias:{nome:'Energéticos'} },
 
   /* ── Copos Gin ── */
-  { id:'bev6', nome:'Copo Gin',       descricao:'Gin + Gelo de Coco — escolha a marca', preco:12.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/gin-dober.jpg',  ordem:0, categorias:{nome:'Copos Gin'} },
+  { id:'bev6', nome:'Copo Gin',       descricao:'Gin + Gelo de Coco — escolha a marca', preco:12.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b5', imagem_url:'assets/bebidas/gin-capa.jpg',  ordem:0, categorias:{nome:'Copos Gin'} },
 
   /* ── Copos Whisky ── */
-  { id:'bev7', nome:'Copo Whisky',    descricao:'Whisky + Gelo de Coco + Red Bull — escolha a marca', preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/whi-redlabel.webp', ordem:0, categorias:{nome:'Copos Whisky'} },
+  { id:'bev7', nome:'Copo Whisky',    descricao:'Whisky + Gelo de Coco + Red Bull — escolha a marca', preco:35.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b6', imagem_url:'assets/bebidas/whisky-capa.webp', ordem:0, categorias:{nome:'Copos Whisky'} },
 
   /* ── Extras ── */
   { id:'bev8', nome:'Gelo de Coco',   descricao:'Gelo de Coco — escolha o sabor',  preco:3.00, destaque:false, ativo:true, disponivel:true, categoria_id:'b7', imagem_url:'assets/bebidas/gelo-coco.png',   ordem:0, categorias:{nome:'Extras'} },
@@ -156,9 +156,9 @@ const DEMO_ADICIONAIS = {
     id: 'g-bev4', produto_id: 'bev4', nome: 'Escolha o produto', obrigatorio: true,
     min_sel: 1, max_sel: 1, ordem: 0,
     adicionais: [
-      { id: 'a-bev4-bio',  nome: 'Bio Leve',            preco_adicional: 0.00, disponivel: true, imagem: null },
-      { id: 'a-bev4-gat',  nome: 'Gatorade 500ml',      preco_adicional: 4.00, disponivel: true, imagem: null },
-      { id: 'a-bev4-del',  nome: 'Del Valle Lata',      preco_adicional: 4.00, disponivel: true, imagem: null },
+      { id: 'a-bev4-bio',  nome: 'Bio Leve',            preco_adicional: 0.00, disponivel: true, imagem: 'assets/opcoes/suco-bioleve.jpg' },
+      { id: 'a-bev4-gat',  nome: 'Gatorade 500ml',      preco_adicional: 4.00, disponivel: true, imagem: 'assets/opcoes/suco-gatorade.jpg' },
+      { id: 'a-bev4-del',  nome: 'Del Valle Lata',      preco_adicional: 4.00, disponivel: true, imagem: 'assets/opcoes/suco-delvalle.jpg' },
     ],
   }],
   /* Energético — escolha o produto (base R$12,00 = Monster/Red Bull) */
