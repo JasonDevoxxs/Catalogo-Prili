@@ -1526,6 +1526,7 @@ body.modal-aberto { overflow: hidden; }
 .checkout-submit:active { transform: scale(.98); }
 
 /* ---- CONTATOS FLUTUANTES ---- */
+/* ---- FAB ALTERNANTE ---- */
 .contatos-flutuantes {
   position: fixed;
   bottom: 1.5rem;
@@ -1534,32 +1535,111 @@ body.modal-aberto { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .75rem;
+  gap: .5rem;
 }
-.contato-fab {
-  width: 3.2rem; height: 3.2rem;
+
+/* Flutuação contínua */
+@keyframes fabFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Glow pulsante */
+@keyframes fabGlow {
+  0%, 100% { box-shadow: var(--fab-glow-a); }
+  50%       { box-shadow: var(--fab-glow-b); }
+}
+
+.contato-fab-unico {
+  --fab-bg:     #25d366;
+  --fab-glow-a: 0 4px 20px rgba(37,211,102,0.5);
+  --fab-glow-b: 0 6px 32px rgba(37,211,102,0.85), 0 0 0 6px rgba(37,211,102,0.12);
+  width: 3.4rem; height: 3.4rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--fab-bg);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+  animation: fabFloat 3s ease-in-out infinite, fabGlow 3s ease-in-out infinite;
+  transition: background .6s ease, transform var(--t-spring);
+  -webkit-tap-highlight-color: transparent;
+}
+.contato-fab-unico:active { transform: scale(0.92); }
+.contato-fab-unico.is-instagram {
+  --fab-bg:     #c62a8a;
+  --fab-glow-a: 0 4px 20px rgba(198,42,138,0.5);
+  --fab-glow-b: 0 6px 32px rgba(198,42,138,0.85), 0 0 0 6px rgba(198,42,138,0.12);
+  background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+}
+
+/* Ícones sobrepostos com fade cruzado */
+.fab-icon {
+  position: absolute;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  transition: opacity .4s ease, transform .4s cubic-bezier(0.34,1.56,0.64,1);
+  opacity: 0;
+  transform: scale(0.6) rotate(-15deg);
+}
+.fab-icon--ativo {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Label que aparece ao trocar */
+.fab-label {
+  background: var(--cor-surface-2);
+  color: var(--cor-texto);
+  font-size: .72rem;
+  font-weight: 600;
+  font-family: var(--fonte-corpo);
+  padding: .3rem .75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--cor-borda-suave);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .3s ease, transform .3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+}
+.fab-label.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mini-menu (long press) */
+.fab-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  animation: fabMenuIn .3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes fabMenuIn {
+  from { opacity: 0; transform: scale(0.8) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.fab-menu-item {
+  width: 2.8rem; height: 2.8rem;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   text-decoration: none;
+  color: #fff;
   transition: transform var(--t-spring), box-shadow var(--t-fast);
 }
-.contato-fab:hover { transform: scale(1.12) translateY(-2px); }
-.contato-fab.whatsapp {
+.fab-menu-item:active { transform: scale(0.9); }
+.fab-menu-item.whatsapp {
   background: #25d366;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
-  color: #fff;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.5);
 }
-.contato-fab.whatsapp:hover { box-shadow: 0 6px 28px rgba(37,211,102,0.65); }
-.contato-fab.instagram {
-  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  box-shadow: 0 4px 20px rgba(220,39,67,0.45);
-  color: #fff;
-}
-.contato-fab.instagram:hover { box-shadow: 0 6px 28px rgba(220,39,67,0.6); }
-.contato-fab.is-loading {
-  pointer-events: none;
-  opacity: .55;
-  filter: grayscale(.4);
+.fab-menu-item.instagram {
+  background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+  box-shadow: 0 4px 16px rgba(198,42,138,0.45);
 }
 
 /* ---- TOAST ---- */
@@ -1813,7 +1893,7 @@ footer span { color: var(--cor-primaria); }
   .produtos-grid:not(.layout-1) .produto-card .img-wrap { aspect-ratio: 1 / 1; }
 
   /* Shift floating elements above bottom nav */
-  .contatos-flutuantes { bottom: calc(52px + 2rem + env(safe-area-inset-bottom)); }
+  .contatos-flutuantes { bottom: calc(52px + 1.5rem + env(safe-area-inset-bottom)); }
   #toast { bottom: calc(52px + 2.25rem + env(safe-area-inset-bottom)); }
 
   /* Body breathing room for bottom nav */
