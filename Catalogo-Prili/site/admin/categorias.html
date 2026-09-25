@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorias — Admin</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <img src="../assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span id="sb-nome">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"   class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Dashboard</span></a>
+      <a href="produtos.html"    class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Produtos</span></a>
+      <a href="categorias.html"  class="nav-item ativo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Categorias</span></a>
+      <a href="configuracoes.html" class="nav-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Configurações</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="btn-logout"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Sair</span></button>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <span class="page-title">Categorias</span>
+      <span class="topbar-user" id="user-email"></span>
+    </div>
+    <div class="admin-content">
+      <div class="card-tabela" style="max-width:700px">
+        <div class="tabela-header">
+          <h2>Categorias</h2>
+          <button class="btn btn-primario" id="btn-nova-cat">+ Nova categoria</button>
+        </div>
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr><th>Nome</th><th>Ordem</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="tbody-cats"><tr><td colspan="4" style="text-align:center;padding:2rem;color:#9ca3af">Carregando…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-titulo">Nova categoria</h3>
+      <button class="btn-fechar-modal" id="btn-fechar-modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form id="form-cat">
+      <div class="modal-corpo">
+        <div class="form-grupo">
+          <label for="c-nome">Nome *</label>
+          <input id="c-nome" class="form-input" type="text" placeholder="Ex: Pastéis salgados" required>
+        </div>
+        <div class="form-grid">
+          <div class="form-grupo">
+            <label for="c-ordem">Ordem</label>
+            <input id="c-ordem" class="form-input" type="number" min="0" value="0">
+          </div>
+          <div class="form-grupo" style="justify-content:flex-end;padding-top:1.4rem">
+            <label style="display:flex;gap:.5rem;align-items:center;cursor:pointer">
+              <input type="checkbox" id="c-ativo" checked> Ativa
+            </label>
+          </div>
+        </div>
+        <input type="hidden" id="c-id">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secundario" id="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn btn-primario">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-admin"></div>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+  import CONFIG from '../js/config.js';
+  const supabase = createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) { location.href = 'index.html'; }
+  document.getElementById('user-email').textContent = session.user.email;
+  document.getElementById('sb-nome').textContent = CONFIG.nomeLoja || 'Admin';
+  document.getElementById('btn-logout').addEventListener('click', async () => { await supabase.auth.signOut(); location.href = 'index.html'; });
+
+  let lista = [];
+
+  async function carregar() {
+    const { data } = await supabase.from('categorias').select('*').order('ordem');
+    lista = data || [];
+    const tbody = document.getElementById('tbody-cats');
+    if (!lista.length) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:#9ca3af">Nenhuma categoria.</td></tr>'; return; }
+    tbody.innerHTML = lista.map(c => `
+      <tr>
+        <td>${c.nome}</td>
+        <td>${c.ordem}</td>
+        <td><span class="badge ${c.ativo ? 'verde' : 'vermelho'}">${c.ativo ? 'Ativa' : 'Inativa'}</span></td>
+        <td><div class="acoes-td">
+          <button class="btn-icon" onclick="editar('${c.id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="btn-icon perigo" onclick="excluir('${c.id}', '${c.nome.replace(/'/g,"\\'")}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div></td>
+      </tr>
+    `).join('');
+  }
+  carregar();
+
+  function abrirModal(cat = null) {
+    document.getElementById('modal-overlay').classList.add('visivel');
+    document.getElementById('form-cat').reset();
+    document.getElementById('modal-titulo').textContent = cat ? 'Editar categoria' : 'Nova categoria';
+    if (cat) {
+      document.getElementById('c-id').value = cat.id;
+      document.getElementById('c-nome').value = cat.nome;
+      document.getElementById('c-ordem').value = cat.ordem;
+      document.getElementById('c-ativo').checked = cat.ativo;
+    } else {
+      document.getElementById('c-id').value = '';
+    }
+  }
+  function fecharModal() { document.getElementById('modal-overlay').classList.remove('visivel'); }
+
+  document.getElementById('btn-nova-cat').addEventListener('click', () => abrirModal());
+  document.getElementById('btn-fechar-modal').addEventListener('click', fecharModal);
+  document.getElementById('btn-cancelar').addEventListener('click', fecharModal);
+  document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) fecharModal(); });
+
+  document.getElementById('form-cat').addEventListener('submit', async e => {
+    e.preventDefault();
+    const id = document.getElementById('c-id').value;
+    const payload = {
+      nome: document.getElementById('c-nome').value.trim(),
+      ordem: parseInt(document.getElementById('c-ordem').value) || 0,
+      ativo: document.getElementById('c-ativo').checked,
+    };
+    const { error } = id
+      ? await supabase.from('categorias').update(payload).eq('id', id)
+      : await supabase.from('categorias').insert(payload);
+    if (error) { toast('Erro: ' + error.message, 'erro'); }
+    else { toast('Salvo!', 'sucesso'); fecharModal(); carregar(); }
+  });
+
+  window.editar = id => abrirModal(lista.find(c => c.id === id));
+  window.excluir = async (id, nome) => {
+    if (!confirm(`Excluir "${nome}"?\nProdutos desta categoria perderão o vínculo.`)) return;
+    const { error } = await supabase.from('categorias').delete().eq('id', id);
+    if (error) toast('Erro: ' + error.message, 'erro');
+    else { toast('Excluída.', 'sucesso'); carregar(); }
+  };
+
+  function toast(msg, tipo = '') {
+    const el = document.getElementById('toast-admin');
+    el.textContent = msg; el.className = `visivel ${tipo}`;
+    clearTimeout(el._t); el._t = setTimeout(() => el.className = '', 2500);
+  }
+</script>
+</body>
+</html>

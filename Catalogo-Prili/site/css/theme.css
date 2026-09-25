@@ -1,0 +1,83 @@
+/* ============================================================
+   theme.css — PERSONALIZAÇÃO POR CLIENTE
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Paleta dark luxury */
+  --cor-bg:           #0d0a08;
+  --cor-surface:      #161210;
+  --cor-surface-2:    #1f1b17;
+  --cor-card:         #1a1612;
+  --cor-card-hover:   #221e19;
+
+  /* Acento principal — dourado âmbar */
+  --cor-primaria:       #e8a020;
+  --cor-primaria-rgb:   232, 160, 32;
+  --cor-primaria-hover: #f5b235;
+  --cor-primaria-glow:  rgba(232, 160, 32, 0.35);
+
+  /* Acento secundário — vermelho profundo */
+  --cor-secundaria:     #c41e3a;
+  --cor-secundaria-rgb: 196, 30, 58;
+
+  /* Texto */
+  --cor-texto:        #f0ebe4;
+  --cor-texto-suave:  #9a8f82;
+  --cor-texto-fraco:  #5a5248;
+
+  /* Bordas e divisores */
+  --cor-borda:        rgba(232, 160, 32, 0.12);
+  --cor-borda-suave:  rgba(255, 255, 255, 0.06);
+
+  /* Sombras */
+  --sombra-card:  0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --sombra-glow:  0 0 40px var(--cor-primaria-glow);
+  --sombra-hover: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(232,160,32,0.2);
+
+  /* Glassmorphism */
+  --glass-bg:     rgba(22, 18, 14, 0.7);
+  --glass-border: rgba(232, 160, 32, 0.15);
+  --glass-blur:   20px;
+
+  /* Tipografia */
+  --fonte-titulo: 'Playfair Display', 'Georgia', serif;
+  --fonte-corpo:  'Inter', 'Helvetica Neue', sans-serif;
+  --fonte-mono:   'Space Mono', monospace;
+  --tamanho-base: 16px;
+
+  /* Geometria */
+  --radius-card:   16px;
+  --radius-btn:    12px;
+  --radius-pill:   999px;
+  --radius-input:  12px;
+  --gap-secao:     4rem;
+
+  /* Transições */
+  --t-fast:   0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --t-med:    0.3s  cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow:   0.5s  cubic-bezier(0.4, 0, 0.2, 1);
+  --t-spring: 0.5s  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* #9 — altura do banner de manutenção (controlada via JS) */
+  --banner-h: 0px;
+}
+
+/* Tema claro — mesma identidade âmbar e vinho, com leitura mais leve. */
+html[data-theme="light"] {
+  --cor-bg:           #fbf7f0;
+  --cor-surface:      #fffdf9;
+  --cor-surface-2:    #f4ede3;
+  --cor-card:         #ffffff;
+  --cor-card-hover:   #fffaf2;
+  --cor-texto:        #2a1a12;
+  --cor-texto-suave:  #705d50;
+  --cor-texto-fraco:  #a18d7e;
+  --cor-borda:        rgba(150, 88, 18, 0.22);
+  --cor-borda-suave:  rgba(73, 42, 22, 0.11);
+  --glass-bg:         rgba(255, 253, 249, 0.84);
+  --glass-border:     rgba(150, 88, 18, 0.18);
+  --sombra-card:      0 5px 22px rgba(69, 36, 15, 0.08), 0 1px 0 rgba(255,255,255,.9) inset;
+  --sombra-hover:     0 18px 40px rgba(69, 36, 15, 0.14), 0 0 0 1px rgba(150,88,18,.18);
+}
