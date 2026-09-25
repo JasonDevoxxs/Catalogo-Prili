@@ -1894,7 +1894,7 @@ footer span { color: var(--cor-primaria); }
   .produtos-grid:not(.layout-1) .produto-card .img-wrap { aspect-ratio: 1 / 1; }
 
   /* Shift floating elements above bottom nav */
-  .contatos-flutuantes { bottom: calc(52px + 1.5rem + env(safe-area-inset-bottom)); }
+  .contatos-flutuantes { bottom: auto; top: 45%; transform: translateY(-50%); }
   #toast { bottom: calc(52px + 2.25rem + env(safe-area-inset-bottom)); }
 
   /* Body breathing room for bottom nav */
