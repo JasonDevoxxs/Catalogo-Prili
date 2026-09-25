@@ -1873,7 +1873,7 @@ footer span { color: var(--cor-primaria); }
     position: fixed;
     bottom: 0; left: 0; right: 0;
     height: calc(52px + 2.5rem + env(safe-area-inset-bottom));
-    background: linear-gradient(to top, var(--cor-fundo) 40%, transparent 100%);
+    background: linear-gradient(to top, var(--cor-bg) 40%, transparent 100%);
     z-index: 309;
     pointer-events: none;
   }
