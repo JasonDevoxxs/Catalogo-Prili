@@ -1894,8 +1894,8 @@ footer span { color: var(--cor-primaria); }
   .produtos-grid:not(.layout-1) .produto-card .img-wrap { aspect-ratio: 1 / 1; }
 
   /* Shift floating elements above bottom nav */
-  .contatos-flutuantes { bottom: calc(87px + 3.25rem + env(safe-area-inset-bottom)); top: auto; transform: none; }
-  #toast { bottom: calc(87px + 2rem + env(safe-area-inset-bottom)); }
+  .contatos-flutuantes { bottom: calc(72px + 3.25rem + env(safe-area-inset-bottom)); top: auto; transform: none; }
+  #toast { bottom: calc(72px + 2rem + env(safe-area-inset-bottom)); }
 
   /* Body breathing room for bottom nav */
   body { padding-bottom: calc(87px + 2.5rem + env(safe-area-inset-bottom)); }
@@ -1954,7 +1954,7 @@ footer span { color: var(--cor-primaria); }
     content: '';
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    height: calc(87px + 3rem + env(safe-area-inset-bottom));
+    height: calc(72px + 3rem + env(safe-area-inset-bottom));
     background: linear-gradient(to top, var(--cor-bg) 35%, transparent 100%);
     z-index: 309;
     pointer-events: none;
@@ -1965,15 +1965,15 @@ footer span { color: var(--cor-primaria); }
     display: flex;
     align-items: center;
     position: fixed;
-    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    bottom: calc(16px + env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
-    width: min(346px, calc(100vw - 2.5rem));
-    height: 87px;
+    width: min(320px, calc(100vw - 88px));
+    height: 72px;
     border-radius: 44px;
     background: var(--cor-surface);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 28px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
     z-index: 310;
     padding: 0;
     overflow: visible;
@@ -1984,8 +1984,8 @@ footer span { color: var(--cor-primaria); }
     position: absolute;
     top: 50%;
     left: 0;
-    width: 84px;
-    height: 84px;
+    width: 66px;
+    height: 66px;
     border-radius: 50%;
     background: var(--cor-primaria);
     transform: translateY(-50%) translateX(0px);
