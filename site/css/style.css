@@ -1813,8 +1813,8 @@ footer span { color: var(--cor-primaria); }
   .produtos-grid:not(.layout-1) .produto-card .img-wrap { aspect-ratio: 1 / 1; }
 
   /* Shift floating elements above bottom nav */
-  .contatos-flutuantes { bottom: calc(1.5rem + 60px + env(safe-area-inset-bottom)); }
-  #toast { bottom: calc(1.75rem + 60px + env(safe-area-inset-bottom)); }
+  .contatos-flutuantes { bottom: calc(52px + 2rem + env(safe-area-inset-bottom)); }
+  #toast { bottom: calc(52px + 2.25rem + env(safe-area-inset-bottom)); }
 
   /* Body breathing room for bottom nav */
   body { padding-bottom: calc(52px + 1.75rem + env(safe-area-inset-bottom)); }
@@ -1867,6 +1867,17 @@ footer span { color: var(--cor-primaria); }
 #bottom-nav { display: none; }
 
 @media (max-width: 768px) {
+  /* Gradiente que "apaga" o conteúdo abaixo da barra flutuante */
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: calc(52px + 2.5rem + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--cor-fundo) 40%, transparent 100%);
+    z-index: 309;
+    pointer-events: none;
+  }
+
   #bottom-nav {
     display: flex;
     position: fixed;
