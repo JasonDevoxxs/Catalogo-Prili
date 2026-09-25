@@ -449,36 +449,45 @@
 
 <!-- ============ BOTTOM NAV (mobile) ============ -->
 <nav id="bottom-nav" aria-label="Navegação principal">
+  <div class="bnav-circle" id="bnav-circle" aria-hidden="true"></div>
   <button class="bnav-btn ativo" id="bnav-inicio" aria-label="Início">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-      <polyline points="9 22 9 12 15 12 15 22"/>
-    </svg>
-    <span>Início</span>
+    <span class="bnav-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </span>
+    <span class="bnav-label">Início</span>
   </button>
   <button class="bnav-btn" id="bnav-menu" aria-label="Cardápio">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="3" width="7" height="7" rx="1"/>
-      <rect x="14" y="3" width="7" height="7" rx="1"/>
-      <rect x="3" y="14" width="7" height="7" rx="1"/>
-      <rect x="14" y="14" width="7" height="7" rx="1"/>
-    </svg>
-    <span>Cardápio</span>
+    <span class="bnav-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+    </span>
+    <span class="bnav-label">Cardápio</span>
   </button>
   <button class="bnav-btn" id="bnav-busca" aria-label="Buscar">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="11" cy="11" r="8"/>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-    <span>Buscar</span>
+    <span class="bnav-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </span>
+    <span class="bnav-label">Buscar</span>
   </button>
   <button class="bnav-btn bnav-btn--carrinho" id="bnav-carrinho" aria-label="Pedido">
     <span class="bnav-badge" id="bnav-badge">0</span>
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-    </svg>
-    <span>Pedido</span>
+    <span class="bnav-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+    </span>
+    <span class="bnav-label">Pedido</span>
   </button>
 </nav>
 
@@ -841,10 +850,31 @@
 
   if (!btnInicio) return;
 
-  function setAtivo(btn) {
-    document.querySelectorAll('.bnav-btn').forEach(function (b) { b.classList.remove('ativo'); });
-    if (btn) btn.classList.add('ativo');
+  var circulo = document.getElementById('bnav-circle');
+  var btns    = document.querySelectorAll('.bnav-btn');
+
+  function moverCirculo(btnAtivo) {
+    if (!circulo || !btnAtivo) return;
+    var nav     = document.getElementById('bottom-nav');
+    var navRect = nav.getBoundingClientRect();
+    var btnRect = btnAtivo.getBoundingClientRect();
+    var centerX = btnRect.left - navRect.left + btnRect.width / 2;
+    circulo.style.transform = 'translateY(-50%) translateX(' + (centerX - 42) + 'px)';
   }
+
+  function setAtivo(btn) {
+    btns.forEach(function (b) { b.classList.remove('ativo'); });
+    if (btn) { btn.classList.add('ativo'); moverCirculo(btn); }
+  }
+
+  /* Posiciona círculo no item inicial sem animação */
+  circulo.style.transition = 'none';
+  moverCirculo(btnInicio);
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      circulo.style.transition = '';
+    });
+  });
 
   /* Início */
   btnInicio.addEventListener('click', function () {
