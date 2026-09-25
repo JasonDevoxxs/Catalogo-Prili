@@ -78,7 +78,7 @@ export function iniciarContatos() {
   /* Se só tem WhatsApp, não alterna */
   let intervalo = null;
   if (plataformas.length > 1) {
-    intervalo = setInterval(alternar, 1500);
+    intervalo = setInterval(alternar, 2000);
   }
 
   /* Clique: abre a plataforma atual */
@@ -99,7 +99,7 @@ export function iniciarContatos() {
   function fecharMenu() {
     menu.hidden = true;
     if (plataformas.length > 1 && !intervalo) {
-      intervalo = setInterval(alternar, 1500);
+      intervalo = setInterval(alternar, 2000);
     }
   }
 
